@@ -1,0 +1,1364 @@
+:root{
+  --paper: #FFFFFF;
+  --paper-2: #F2F2F2;
+  --ink: #1B231F;
+  --ink-soft: #4A544D;
+  --forest: #2B5D3F;
+  --forest-dark: #1E4530;
+  --stake: #C9622A;
+  --slate: #4A6670;
+  --line: #E0E0E0;
+  --line-strong: #C7C7C7;
+  /* Paleta de accion neutra (negro/gris) — reemplaza al verde como color
+     dominante de botones, enlaces y numeros; forest/stake/slate quedan
+     como acentos puntuales de marca (badges, tarjetas de servicio, hero). */
+  --action: #1A1C1A;
+  --action-dark: #000000;
+  --graphite: #26282A;
+  --graphite-dark: #141514;
+  /* Estetica plana tipo purnatur.com: sin esquinas redondeadas en tarjetas/
+     paneles (solo los botones siguen en pildora) y sin sombras — el
+     contraste viene de bordes finos y el espacio en blanco, no de relieve. */
+  --radius: 0px;
+  --radius-lg: 0px;
+  --radius-pill: 999px;
+  --shadow-soft: none;
+  --shadow-card: none;
+}
+
+*{ box-sizing: border-box; margin:0; padding:0; }
+html{ scroll-behavior: smooth; }
+
+/* Grano sutil de papel sobre todo el sitio — refuerza el concepto de
+   marca "--paper" en vez de dejar el fondo completamente plano. */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+body{
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display{
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.mono{ font-family: 'JetBrains Mono', monospace; }
+a{ color: inherit; }
+img{ max-width: 100%; display:block; }
+
+:focus-visible{
+  outline: 2px solid var(--stake);
+  outline-offset: 3px;
+}
+
+.wrap{
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- SCROLL PROGRESS (linea fina de lectura, fija arriba) ---------- */
+.scroll-progress{
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--stake);
+  z-index: 200;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ---------- NAV (barra plana, de borde a borde — estilo purnatur.com) ---------- */
+header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+nav.wrap{
+  display:grid;
+  grid-template-columns: auto 1fr auto;
+  align-items:center;
+  gap: 32px;
+  height: 76px;
+}
+.nav-right{ display:flex; align-items:center; gap: 28px; justify-self:end; }
+.nav-icons{ display:flex; align-items:center; gap: 8px; }
+.nav-icon-btn{
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.nav-icon-btn:hover{ background: var(--action-dark); transform: translateY(-2px); }
+.nav-icon-btn svg{ width: 16px; height: 16px; }
+.logo{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-family:'JetBrains Mono', monospace;
+  font-weight:700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  text-decoration:none;
+}
+.logo .mark{
+  height: 34px;
+  width: auto;
+  display:block;
+  flex-shrink:0;
+}
+footer .logo .mark{ height: 30px; }
+.logo .sub{
+  font-family:'JetBrains Mono', monospace;
+  font-weight:400;
+  font-size: 0.62rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.navlinks{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 40px;
+}
+.navlinks a{
+  text-decoration:none;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  transition: color 0.2s ease;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.navlinks a:hover{ color: var(--action); }
+.navlinks a.active{ color: var(--action); border-bottom-color: var(--action); }
+.navcta{
+  background: var(--action);
+  color: #fff !important;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.01em;
+  font-weight: 600 !important;
+  transition: background 0.2s ease;
+  border-bottom: none !important;
+}
+.navcta:hover{ background: var(--action-dark); }
+
+/* ---------- HERO (home) ---------- */
+/* Panel foto/video a todo lo ancho, de borde a borde — sin tarjeta
+   flotante ni esquinas redondeadas, igual que el hero de purnatur.com. */
+.hero{
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+  min-height: 680px;
+}
+.hero-contours{ position:absolute; inset:0; width:100%; height:100%; opacity: 0.55; }
+
+/* Imagen real de campo, de fondo — sin texto ni logo propios, asi que la
+   tarjeta de coordenadas + CTAs viven encima, agrupadas a la izquierda en
+   vez de repartidas por todo el hero. */
+.hero-bg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position: center 42%;
+  z-index:0;
+}
+.hero-video-overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(105deg, rgba(8,10,8,0.5) 0%, rgba(8,10,8,0.18) 36%, transparent 60%);
+  z-index:0;
+}
+.hero-inner{
+  position: relative;
+  z-index: 1;
+  padding: 72px 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 680px;
+  display:flex;
+  align-items:center;
+}
+.hero-panel{
+  display:flex;
+  flex-direction:column;
+  gap: 24px;
+  max-width: 440px;
+  width:100%;
+}
+@media (max-width: 860px){
+  .hero{ min-height: 560px; }
+  .hero-bg{ object-position: 32% center; }
+  .hero-inner{ min-height: 560px; padding: 44px 20px; align-items:flex-end; }
+  .hero-panel{ max-width: none; }
+}
+
+/* ---------- PAGE HERO (interior pages) ---------- */
+/* Mismo panel plano de borde a borde que el hero de inicio. */
+.page-hero{
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--line);
+}
+.page-hero-contours{ position:absolute; inset:0; width:100%; height:100%; opacity: 0.4; }
+.page-hero-inner{
+  position: relative;
+  padding: 64px 24px 56px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.breadcrumb{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+.breadcrumb a{ text-decoration:none; color: var(--ink-soft); }
+.breadcrumb a:hover{ color: var(--action); }
+.breadcrumb .sep{ margin: 0 8px; color: var(--line-strong); }
+.page-hero h1{ font-size: clamp(2rem, 3.6vw, 2.9rem); max-width: 26ch; }
+.page-hero p.lead{ color: var(--ink-soft); max-width: 56ch; margin-top: 16px; font-size: 1.02rem; }
+
+.eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--action);
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.eyebrow::before{ content:""; width: 24px; height:1px; background: var(--stake); }
+
+.hero-ctas{ display:flex; gap:16px; flex-wrap: wrap; }
+.hero .btn-ghost{ border-color: rgba(255,255,255,0.45); color:#fff; }
+.hero .btn-ghost:hover{ border-color:#fff; background: rgba(255,255,255,0.1); color:#fff; }
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 14px 26px;
+  border-radius: var(--radius-pill);
+  font-family:'JetBrains Mono', monospace;
+  letter-spacing: 0.01em;
+  font-weight: 600;
+  font-size: 0.86rem;
+  text-decoration:none;
+  cursor:pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+.btn-primary{ background: var(--action); color: #fff; }
+.btn-primary:hover{ background: var(--action-dark); }
+.btn-ghost{ border-color: var(--line-strong); color: var(--ink); background: transparent; }
+.btn-ghost:hover{ border-color: var(--action); color: var(--action); }
+.btn-sm{ padding: 9px 16px; font-size: 0.82rem; }
+
+/* Tarjeta "de vidrio" — antes era un bloque blanco solido que tapaba buena
+   parte de la foto del hero; ahora es translucida con blur, para que la
+   imagen se siga viendo detras y pese menos visualmente sobre ella. */
+.benchmark-card{
+  position: relative;
+  background: rgba(9,11,9,0.4);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 22px 24px 20px;
+  color: #fff;
+}
+.benchmark-card .bm-top{
+  display:flex; justify-content: space-between; align-items:flex-start;
+  margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.28);
+}
+.benchmark-card .bm-label{ font-family:'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+.benchmark-card .bm-id{ font-family:'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--stake); font-weight: 600; }
+.bm-coords{ font-family:'JetBrains Mono', monospace; font-size: 1.28rem; font-weight: 500; color: #fff; margin-bottom: 6px; }
+.bm-coords span{ color: var(--stake); }
+.bm-meta{ font-size: 0.8rem; color: rgba(255,255,255,0.72); margin-bottom: 16px; }
+.bm-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.22); }
+.bm-grid div{ text-align:left; }
+.bm-grid .n{ display:block; font-family:'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
+.bm-grid .l{ display:block; font-size: 0.64rem; color: rgba(255,255,255,0.62); text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.35; }
+
+/* ---------- SECTION GENERIC ---------- */
+section{ padding: 96px 0; }
+.section-head{ max-width: 640px; margin-bottom: 56px; }
+.section-head.center{ max-width: 680px; margin-left:auto; margin-right:auto; text-align:center; }
+.section-head.center .eyebrow{ justify-content:center; }
+.section-head.center .eyebrow::before{ display:none; }
+.section-head .eyebrow::before{ background: var(--stake); }
+.section-head h2{ font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 14px; }
+.section-head p{ color: var(--ink-soft); font-size: 1.02rem; }
+
+.reveal{
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  filter: blur(7px);
+  transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1), filter 0.9s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform, filter;
+}
+.reveal.in{ opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
+
+/* ---------- SERVICIOS ---------- */
+.servicios{ background: var(--paper-2); border-bottom: 1px solid var(--line); }
+.serv-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.serv-card{ background: var(--paper-2); padding: 34px 30px; transition: background 0.2s ease; }
+.serv-card:hover{ background: #fff; }
+.serv-icon{ width: 40px; height: 40px; margin-bottom: 20px; }
+.serv-card h3{ font-size: 1.08rem; margin-bottom: 10px; }
+.serv-card p{ font-size: 0.9rem; color: var(--ink-soft); }
+.serv-card a.more{
+  display:inline-block; margin-top:14px; font-size:0.82rem; font-weight:600; color: var(--action); text-decoration:none; border-bottom:1px solid var(--action);
+}
+
+/* ---------- SERVICIOS (home): carrusel a puro arrastre — igual
+   funcionamiento que la galeria "Interiors" de thenest.pl/en: nada se
+   mueve solo, el visitante arrastra con el mouse (o desliza en tactil),
+   un cursor circular reemplaza la flecha normal sobre el carrusel, y una
+   linea fina abajo marca el progreso. El diseño de cada tarjeta sigue el
+   patron de portafolio de purnatur.com: foto real a sangre completa (sin
+   icono, sin insignia), leyenda minima anclada abajo y un boton simple
+   en pildora. Las 6 tarjetas se duplican una vez en el HTML (la copia
+   con aria-hidden) para que el loop sea infinito — `common.js` resetea
+   el scroll en silencio al cruzar el ancho de una copia, asi arrastrar
+   hacia cualquier lado nunca llega a un final. Las 3 que no tienen foto
+   quedan en un color solido oscuro (sin degradado), una de ellas con un
+   resto de azul de marca — el unico acento de color que queda en todo
+   el componente. */
+.serv-carousel{
+  position:relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.serv-carousel.dragging{ cursor: grabbing; }
+.serv-carousel::-webkit-scrollbar{ display:none; }
+.serv-carousel.has-custom-cursor,
+.serv-carousel.has-custom-cursor.dragging{ cursor:none; }
+.serv-track{
+  display:flex;
+  gap: 1px;
+  background: var(--line);
+  width: max-content;
+}
+.serv-progress{
+  height:1px;
+  background: var(--line);
+  margin-top: 22px;
+}
+.serv-progress-fill{ display:block; height:100%; width:0%; background: var(--stake); }
+/* Cursor circular que sigue al mouse mientras esta sobre el carrusel —
+   reemplaza el puntero normal, con un punto relleno mientras se arrastra. */
+.carousel-cursor{
+  position:fixed; top:0; left:0;
+  width:34px; height:34px;
+  margin:-17px 0 0 -17px;
+  border:1.5px solid var(--stake);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:300;
+  opacity:0;
+  display:flex; align-items:center; justify-content:center;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+.carousel-cursor.visible{ opacity:1; }
+.carousel-cursor::after{
+  content:"";
+  width:6px; height:6px;
+  border-radius:50%;
+  background: var(--stake);
+  opacity:0;
+  transition: opacity 0.15s ease;
+}
+.carousel-cursor.dragging{ transform: scale(0.85); }
+.carousel-cursor.dragging::after{ opacity:1; }
+.serv-tile{
+  position: relative;
+  flex: 0 0 380px;
+  min-height: 420px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fff;
+  text-decoration: none;
+  background-color: #141414;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+.serv-tile.photo{ background-size: cover; background-position: center; }
+.serv-tile:hover{ transform: translateY(-4px); }
+/* Fundido desde negro al entrar en pantalla (reveal-on-scroll). */
+.serv-tile::before{
+  content:"";
+  position:absolute; inset:0;
+  background:#0a0a0a;
+  opacity:1;
+  transition: opacity 1.1s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+.serv-tile.reveal.in::before{ opacity:0; }
+/* Velo permanente en las tarjetas con foto, solo para legibilidad del texto. */
+.serv-tile.photo::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.38) 48%, rgba(10,10,10,0.04) 75%);
+  pointer-events:none;
+}
+.serv-tile-num{
+  position:relative; z-index:1;
+  display:block;
+  font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.05em;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: auto;
+}
+.serv-tile-body{ position:relative; z-index:1; }
+.serv-tile-tag{ font-family:'JetBrains Mono', monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.08em; opacity:0.85; margin-bottom:10px; display:block; }
+.serv-tile h3{ color:#fff; font-size:1.42rem; line-height:1.14; margin-bottom: 10px; }
+.serv-tile p{ color: rgba(255,255,255,0.82); font-size:0.88rem; max-width: 34ch; }
+.serv-tile-cta{
+  display:inline-flex; width:max-content;
+  margin-top:20px;
+  padding: 9px 18px;
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: var(--radius-pill);
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.72rem; letter-spacing:0.04em; text-transform:uppercase;
+  color:#fff;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.serv-tile:hover .serv-tile-cta{ background:#fff; color: var(--ink); border-color:#fff; }
+
+.serv-tile.c1{ background-image: url("../img/obra/bonaire-01-viviendas.jpg"); }
+.serv-tile.c2{ background-image: url("../img/obra/obra-movimiento-tierras.jpg"); background-position: center 72%; }
+.serv-tile.c3{ background-color: #1C1D1B; }
+.serv-tile.c4{ background-image: url("../img/campo/campo-01.jpg"); }
+.serv-tile.c5{ background-color: #1A1C1D; }
+.serv-tile.c6{ background-color: #1B2227; }
+
+@media (max-width: 640px){
+  .serv-tile{ flex: 0 0 272px; min-height: 380px; }
+}
+
+/* ---------- Variante "detallada" de .stages (solo en servicios.html):
+   cada stage-item trae ya su lista + foto (o cita, si no hay foto propia
+   para ese servicio) en vez de repetir titulo/descripcion en una seccion
+   aparte mas abajo, como pasaba antes — info duplicada sin necesidad. ---------- */
+.stages-detailed .stage-item{
+  max-width: none;
+  margin-left: 0 !important;
+  padding: 40px 36px 36px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--line-strong);
+  transition: border-top-color 0.3s ease;
+}
+.stages-detailed .stage-item.accent-stake{ border-top-color: var(--stake); }
+.stages-detailed .stage-item.accent-forest{ border-top-color: var(--forest); }
+.stages-detailed .stage-item.accent-slate{ border-top-color: var(--slate); }
+.stages-detailed .stage-item h3{ font-size: 1.38rem; margin-bottom: 14px; }
+.stages-detailed .stage-item > p{ max-width: 64ch; font-size: 1rem; line-height:1.6; }
+.stages-detailed .stage-detail{
+  display:grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 52px;
+  align-items:start;
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px dashed var(--line-strong);
+}
+.stages-detailed .stage-detail .serv-highlight{ margin:0; }
+.serv-list{ list-style:none; display:grid; gap:18px; }
+.serv-list li{ display:flex; gap:12px; font-size:0.95rem; line-height:1.55; color: var(--ink-soft); }
+.serv-list li::before{ content:""; width:6px; height:6px; margin-top:8px; background: var(--action); flex-shrink:0; transform: rotate(45deg); }
+.serv-visual{
+  aspect-ratio: 4/3;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow:hidden;
+  position:relative;
+}
+
+/* Tarjeta de contenido real (no gráfico de relleno) para los servicios
+   de los que no tenemos foto propia — un valor corporativo real del
+   portafolio de la empresa, aplicado a ese servicio. */
+.serv-highlight{
+  background: var(--graphite-dark);
+  color: rgba(255,255,255,0.92);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-card);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height: 260px;
+}
+.serv-highlight .eyebrow{ color: rgba(255,255,255,0.6); margin-bottom:16px; }
+.serv-highlight .eyebrow::before{ background: var(--stake); }
+.serv-highlight blockquote{
+  font-family:'JetBrains Mono', monospace;
+  font-weight:600;
+  font-size: 1.15rem;
+  line-height:1.4;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.serv-highlight cite{
+  font-style:normal;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.74rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color: rgba(255,255,255,0.58);
+}
+
+/* ---------- STATS (tarjetas individuales, como en Loro) ---------- */
+.stats{ padding: 64px 0; }
+.stats-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.stat{
+  padding: 36px 28px 30px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease;
+}
+.stat:hover{ transform: translateY(-4px); }
+.stat .num{ font-family:'JetBrains Mono', monospace; font-size: 2.3rem; font-weight: 600; color: var(--action); display:block; margin-bottom: 14px; line-height:1; }
+.stat .lbl{ display:block; font-size: 0.8rem; color: var(--ink-soft); line-height:1.4; padding-top: 10px; border-top: 1px solid var(--line); }
+
+/* ---------- PROYECTOS ---------- */
+.filter-bar{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.filter-btn{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.03em;
+  padding: 9px 16px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  border-radius: 20px;
+  cursor:pointer;
+  color: var(--ink-soft);
+  transition: all 0.2s ease;
+}
+.filter-btn:hover{ border-color: var(--action); color: var(--action); }
+.filter-btn.active{ background: var(--action); border-color: var(--action); color: #fff; }
+
+.proy-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.proy-card{ border: 1px solid var(--line); background: #fff; border-radius: var(--radius); overflow:hidden; transition: border-color 0.2s ease, transform 0.2s ease, opacity 0.25s ease; }
+.proy-card:hover{ border-color: var(--action); transform: translateY(-3px); }
+.proy-card.hidden-card{ display:none; }
+.proy-map{ height: 130px; position: relative; background: linear-gradient(135deg, #EDEDED, #E0E0E0); overflow:hidden; border-bottom: 1px solid var(--line); }
+.proy-body{ padding: 24px 26px 26px; }
+.proy-top{ display:flex; justify-content: space-between; align-items:flex-start; gap: 12px; margin-bottom: 10px; }
+.proy-top h3{ font-size: 1.12rem; }
+.badge{ font-family:'JetBrains Mono', monospace; font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 9px; border-radius: 20px; white-space: nowrap; font-weight: 600; }
+.badge-done{ background: rgba(43,93,63,0.12); color: var(--forest); }
+.badge-progress{ background: rgba(201,98,42,0.12); color: var(--stake); }
+.proy-loc{ font-size: 0.84rem; color: var(--ink-soft); margin-bottom: 16px; }
+.proy-data{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding-top: 16px; border-top: 1px dashed var(--line-strong); font-family:'JetBrains Mono', monospace; }
+.proy-data div{ font-size: 0.72rem; color: var(--ink-soft); }
+.proy-data strong{ display:block; font-size: 0.86rem; color: var(--ink); font-weight: 600; margin-top: 3px; }
+
+/* ---------- MISIÓN (banda oscura tipo manifiesto, no un testimonio de
+   cliente — mismo ritmo de bandas oscuras que `.cta-band`/footer, con una
+   marca de comillas enorme y tenue de fondo en vez del patron generico
+   "kicker con lineas a los lados" de un slider de testimonios. ---------- */
+.mission{
+  position:relative;
+  overflow:hidden;
+  background: var(--graphite-dark);
+  color:#fff;
+  text-align:center;
+  padding: 56px 0;
+}
+.mission-mark{
+  position:absolute;
+  top:-0.2em; left:50%;
+  transform: translateX(-50%);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 8rem;
+  line-height:1;
+  color: rgba(255,255,255,0.05);
+  pointer-events:none;
+  user-select:none;
+}
+.mission-inner{ position:relative; z-index:1; max-width: 1080px; margin:0 auto; }
+.mission .eyebrow{ justify-content:center; color: rgba(255,255,255,0.7); }
+.mission blockquote{
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  color: #fff;
+  margin: 14px auto 18px;
+}
+.mission-author{ font-family:'JetBrains Mono', monospace; font-size: 0.86rem; color: var(--stake); font-weight: 600; }
+.mission-author span{ display:block; color: rgba(255,255,255,0.6); font-weight: 400; font-size: 0.78rem; margin-top: 4px; }
+
+/* ---------- PROCESO: paso a paso con riel vertical y marcador que
+   avanza (y retrocede) con el scroll — inspirado en la seccion
+   "Everything under one address" de thenest.pl. El progreso se
+   recalcula en cada evento de scroll (ver common.js), asi que es
+   reversible por naturaleza: no es una animacion de una sola vez. ---------- */
+.stages{ display:flex; gap: 56px; align-items:stretch; }
+.stages-rail{
+  position:relative;
+  width: 2px;
+  flex-shrink:0;
+  background: repeating-linear-gradient(to bottom, var(--line-strong) 0 4px, transparent 4px 10px);
+  margin-top: 6px;
+}
+.stages-fill{
+  position:absolute; top:0; left:0;
+  width:100%; height:0%;
+  background: var(--stake);
+}
+.stages-marker{
+  position:absolute; left:50%; top:0%;
+  transform: translate(-50%, -50%);
+  width: 26px; height:26px;
+  border-radius:50%;
+  background: var(--stake);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 8px 18px -8px rgba(201,98,42,0.65);
+}
+.stages-list{ display:flex; flex-direction:column; gap: 72px; flex:1; padding: 4px 0; }
+.stage-item{
+  max-width: 480px;
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
+}
+.stage-item.active{ opacity:1; }
+.stage-item:nth-child(2){ margin-left: 26px; }
+.stage-item:nth-child(3){ margin-left: 52px; }
+.stage-item:nth-child(4){ margin-left: 78px; }
+.stage-item:nth-child(5){ margin-left: 52px; }
+.stage-item:nth-child(6){ margin-left: 26px; }
+.stage-num{
+  display:block;
+  color: var(--stake);
+  font-size: 0.74rem; letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.stage-item h3{ font-size: 1.12rem; margin-bottom: 10px; transition: color 0.4s ease; }
+.stage-item p{ color: var(--ink-soft); font-size: 0.92rem; }
+
+/* Variante horizontal de `.stages` (solo en index.html) — mismo riel +
+   marcador, pero acostado arriba, y la lista se desplaza con el scroll
+   del mouse en vez de bajar con la pagina (igual comportamiento nativo
+   que ya tenia el viejo `.serv-carousel`: al pasar el cursor por encima
+   de un contenedor con overflow-x, la rueda vertical mueve el scroll
+   horizontal). El progreso lo calcula `common.js` sobre el propio
+   scrollLeft del contenedor, no sobre la posicion de la pagina. */
+.stages.stages-h{ flex-direction: column; align-items:stretch; gap: 28px; }
+.stages-h .stages-rail-row{ display:flex; align-items:center; gap: 24px; }
+.stages-h .stages-rail{
+  flex: 1;
+  width:auto; height:2px; margin-top:0;
+  background: repeating-linear-gradient(to right, var(--line-strong) 0 4px, transparent 4px 10px);
+}
+.stages-nav{ display:flex; gap: 10px; flex-shrink:0; }
+.stages-nav-btn{
+  width: 38px; height:38px;
+  border-radius:50%;
+  border:1px solid var(--line-strong);
+  background:#fff;
+  color: var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+.stages-nav-btn:hover{ background: var(--action); border-color: var(--action); color:#fff; transform: translateY(-2px); }
+.stages-nav-btn:active{ transform: scale(0.92); }
+.stages-nav-btn:disabled{ opacity:0.35; cursor:default; pointer-events:none; }
+.stages-h .stages-fill{ width:0%; height:100%; }
+.stages-h .stages-marker{ top:50%; left:0%; transform: translate(-50%,-50%); }
+.stages-h .stages-list{
+  flex-direction: row;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 4px 4px 14px;
+  margin: 0 -4px;
+  cursor: grab;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.stages-h .stages-list::-webkit-scrollbar{ display:none; }
+.stages-h .stages-list.dragging{ cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.stages-h .stage-item{
+  flex: 0 0 440px;
+  max-width: none;
+  margin-left: 0 !important;
+  padding: 0 36px 0 0;
+  scroll-snap-align: start;
+}
+@media (max-width: 640px){
+  .stages-h .stage-item{ flex-basis: 84vw; }
+}
+
+/* ---------- NOSOTROS ---------- */
+.nosotros-grid{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items:center; }
+.topo-panel{ aspect-ratio: 4/5; border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(160deg, #F3F3F3, #E6E6E6); position: relative; overflow:hidden; }
+.valores{ list-style:none; margin-top: 26px; display:grid; gap: 18px; }
+.valores li{ display:flex; gap: 14px; align-items:flex-start; font-size: 0.95rem; }
+.valores li::before{ content:""; width: 7px; height:7px; margin-top: 7px; background: var(--action); flex-shrink:0; transform: rotate(45deg); }
+.valores strong{ color: var(--ink); }
+.valores span{ color: var(--ink-soft); display:block; font-size: 0.88rem; margin-top: 2px;}
+
+/* Historia / timeline */
+.historia{ border-top:1px solid var(--line); }
+.timeline{ display:grid; gap:0; }
+.tl-item{ display:grid; grid-template-columns: 110px 1fr; gap:28px; padding: 26px 0; border-top:1px solid var(--line); }
+.tl-item:first-child{ border-top:none; }
+.tl-year{ font-family:'JetBrains Mono', monospace; font-weight:600; color:var(--action); font-size:1rem; }
+.tl-item h3{ font-size:1rem; margin-bottom:6px; }
+.tl-item p{ color:var(--ink-soft); font-size:0.9rem; max-width:60ch; }
+
+/* Certificaciones */
+.cert-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cert-card{ border:1px solid var(--line); background:#fff; padding: 24px; border-radius: var(--radius); }
+.cert-card .cert-tag{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--slate); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px; display:block; }
+.cert-card h3{ font-size:1rem; margin-bottom:8px; }
+.cert-card p{ font-size:0.86rem; color:var(--ink-soft); }
+
+/* ---------- CONTACTO ---------- */
+.contacto{ display:grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.contacto-info .item{ padding: 18px 0; border-top: 1px solid var(--line); }
+.contacto-info .item:first-child{ border-top:none; }
+.contacto-info .l{ font-family:'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+.contacto-info .v{ font-size: 1rem; font-weight: 500; }
+
+form{ display:grid; gap: 16px; }
+.field{ display:grid; gap: 6px; }
+.field label{ font-size: 0.78rem; color: var(--ink-soft); font-weight: 500; }
+.field input, .field textarea, .field select{
+  border: 1px solid var(--line-strong); background: #fff; padding: 12px 14px; border-radius: var(--radius);
+  font-family: 'Inter', sans-serif; font-size: 0.94rem; color: var(--ink);
+}
+.field textarea{ resize: vertical; min-height: 96px; }
+.field input:focus, .field textarea:focus, .field select:focus{ border-color: var(--action); }
+.form-submit{ justify-self: start; margin-top: 6px; }
+
+.faq{ border-top:1px solid var(--line); }
+.faq-item{ padding: 24px 0; border-top:1px solid var(--line); }
+.faq-item:first-child{ border-top:none; }
+.faq-item h3{ font-size: 1rem; margin-bottom: 8px; }
+.faq-item p{ color: var(--ink-soft); font-size: 0.92rem; max-width: 68ch; }
+
+/* CTA band */
+.cta-band{
+  background: var(--graphite-dark);
+  color: #fff;
+  padding: 64px 0;
+}
+.cta-band h2{ color:#fff; }
+.cta-band p{ color: rgba(255,255,255,0.8); }
+.cta-band .btn-primary{ background:#fff; color: var(--action); }
+.cta-band .btn-primary:hover{ background: var(--paper-2); }
+.cta-inner{ display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; }
+
+/* Footer como banda oscura de borde a borde, mismo lenguaje plano que el hero/cta-band. */
+footer{
+  background: var(--graphite-dark);
+  color: rgba(255,255,255,0.88);
+  margin-top: 40px;
+  padding: 56px 0 0;
+}
+.foot-grid{ display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+.foot-col h4{ font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color: rgba(255,255,255,0.55); margin-bottom:14px; font-family:'JetBrains Mono', monospace; font-weight:500; }
+.foot-col a{ display:block; font-size:0.88rem; text-decoration:none; color: rgba(255,255,255,0.9); margin-bottom:10px; }
+.foot-col a:hover{ color: #fff; text-decoration: underline; }
+.foot-col p{ font-size:0.88rem; color: rgba(255,255,255,0.65); max-width: 32ch; }
+footer .logo{ color: #fff; }
+footer .logo .sub{ color: rgba(255,255,255,0.55); }
+footer .copy-btn{ background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.85); }
+.foot-bottom{
+  display:flex; justify-content: space-between; align-items:center; flex-wrap: wrap; gap: 16px;
+  padding: 20px 0; margin-top: 8px;
+  background: rgba(0,0,0,0.18);
+}
+.foot-bottom .wrap{ display:flex; justify-content: space-between; align-items:center; flex-wrap: wrap; gap: 16px; width:100%; }
+.foot-bottom p{ font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+
+@media (max-width: 860px){
+  .navlinks{ display:none; }
+  .serv-grid{ grid-template-columns: 1fr; }
+  .stages-detailed .stage-detail{ grid-template-columns: 1fr; }
+  .stats-grid{ grid-template-columns: repeat(2,1fr); }
+  .stat{ border-bottom: 1px solid var(--line); }
+  .proy-grid{ grid-template-columns: 1fr; }
+  .nosotros-grid{ grid-template-columns: 1fr; }
+  .contacto{ grid-template-columns: 1fr; }
+  .stages{ gap: 24px; }
+  .stages-list{ gap: 48px; }
+  .stage-item:nth-child(2){ margin-left: 10px; }
+  .stage-item:nth-child(3){ margin-left: 20px; }
+  .stage-item:nth-child(4){ margin-left: 30px; }
+  .stage-item:nth-child(5){ margin-left: 20px; }
+  .stage-item:nth-child(6){ margin-left: 10px; }
+  .cert-grid{ grid-template-columns: 1fr; }
+  .foot-grid{ grid-template-columns: 1fr 1fr; }
+  .tl-item{ grid-template-columns: 1fr; gap: 6px; }
+}
+
+/* ---------- MICRO-INTERACTIONS ---------- */
+.btn{ transform: translateY(0) scale(1); }
+.btn:active{ transform: scale(0.96); }
+.btn-primary, .btn-ghost{ position:relative; overflow:hidden; }
+
+.navlinks a{ position:relative; }
+.navlinks a:not(.navcta)::after{
+  content:"";
+  position:absolute;
+  left:50%; bottom:-5px;
+  width:0; height:2px;
+  background: var(--stake);
+  transition: width 0.3s cubic-bezier(.16,1,.3,1), left 0.3s cubic-bezier(.16,1,.3,1);
+}
+.navlinks a:not(.navcta):hover::after{ left:0; width:100%; }
+.navlinks a.active::after{ left:0; width:100%; background: var(--action); }
+
+header{ transition: border-color 0.3s ease, background 0.3s ease; }
+header.scrolled{ background: rgba(255,255,255,0.98); border-bottom-color: var(--line-strong); }
+
+.serv-card{ position: relative; }
+.serv-card svg.serv-icon path, .serv-card svg.serv-icon circle, .serv-card svg.serv-icon line, .serv-card svg.serv-icon rect{
+  transition: stroke 0.3s ease;
+}
+.serv-card:hover svg.serv-icon path,
+.serv-card:hover svg.serv-icon line{ stroke: var(--stake); }
+.serv-icon.draw path, .serv-icon.draw line{
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  transition: stroke-dashoffset 1s cubic-bezier(.4,0,.2,1);
+}
+.serv-icon.draw.in path, .serv-icon.draw.in line{ stroke-dashoffset: 0; }
+
+.proy-card{ will-change: transform; }
+.proy-card:hover .proy-map iframe{ transform: scale(1.06); }
+.proy-map{ position:relative; }
+.proy-map iframe{
+  width:100%; height:100%; border:0; display:block;
+  filter: grayscale(0.35) sepia(0.15) hue-rotate(60deg) saturate(1.3) brightness(1.02);
+  transition: transform 0.5s ease;
+  pointer-events:none;
+}
+.proy-map .map-tag{
+  position:absolute; top:10px; left:10px;
+  background: rgba(255,255,255,0.92);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  padding: 4px 8px;
+  border-radius: 20px;
+  color: var(--action);
+  letter-spacing: 0.03em;
+  z-index: 2;
+  border: 1px solid var(--line);
+}
+
+.map-embed-wrap{
+  aspect-ratio: 4/3;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow:hidden;
+  margin-top: 32px;
+  position: relative;
+}
+.map-embed-wrap iframe{
+  width:100%; height:100%; border:0; display:block;
+  filter: grayscale(0.35) sepia(0.15) hue-rotate(60deg) saturate(1.3) brightness(1.02);
+}
+.map-embed-wrap .map-caption{
+  position:absolute; bottom:0; left:0; right:0;
+  background: rgba(27,35,31,0.85);
+  color:#fff;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.7rem;
+  padding: 8px 12px;
+  letter-spacing: 0.02em;
+}
+
+.copy-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.copy-btn{
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  color: var(--ink-soft);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor:pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  flex-shrink:0;
+}
+.copy-btn:hover{ border-color: var(--action); color: var(--action); }
+.copy-btn.copied{ background: var(--action); border-color: var(--action); color:#fff; }
+
+.bm-pulse{
+  position:relative;
+  display:inline-block;
+  width:6px; height:6px;
+  border-radius:50%;
+  background: var(--stake);
+}
+.bm-pulse::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border: 1.5px solid var(--stake);
+  animation: pulse-ring 2.2s cubic-bezier(.4,0,.3,1) infinite;
+}
+@keyframes pulse-ring{
+  0%{ transform: scale(0.6); opacity: 0.9; }
+  100%{ transform: scale(2.2); opacity: 0; }
+}
+
+.hero-contours{ transition: transform 0.2s ease-out; }
+
+.proy-card.filtering-out{ opacity:0; transform: scale(0.94); pointer-events:none; }
+.proy-card.filtering-in{ opacity:1; transform: scale(1); }
+.proy-card{ transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.2s ease; }
+
+.tl-item .tl-year{ position:relative; }
+.timeline{ position:relative; }
+.timeline::before{
+  content:"";
+  position:absolute;
+  left: 55px;
+  top:0; bottom:0;
+  width:1px;
+  background: var(--line);
+}
+.timeline .tl-progress{
+  position:absolute;
+  left:55px; top:0;
+  width:1px;
+  background: var(--action);
+  height:0%;
+  transition: height 0.1s linear;
+}
+
+.stat .num{ display:inline-block; }
+
+/* ---------- PROYECTOS TOOLBAR (search + sort) ---------- */
+.proy-toolbar{
+  display:flex;
+  gap: 16px;
+  align-items:center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.search-field{
+  position: relative;
+  flex: 1 1 260px;
+  max-width: 360px;
+}
+.search-field svg{
+  position:absolute; left:14px; top:50%; transform: translateY(-50%);
+  color: var(--ink-soft); pointer-events:none;
+}
+.search-field input{
+  width:100%;
+  padding: 11px 14px 11px 40px;
+  border: 1px solid var(--line-strong);
+  background:#fff;
+  border-radius: 20px;
+  font-family:'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+.search-field input:focus{ border-color: var(--action); }
+.sort-field{ display:flex; align-items:center; gap:8px; }
+.sort-field label{ font-size:0.78rem; color: var(--ink-soft); white-space:nowrap; }
+.sort-field select{
+  border: 1px solid var(--line-strong);
+  background:#fff;
+  padding: 9px 12px;
+  border-radius: 20px;
+  font-family:'Inter', sans-serif;
+  font-size: 0.84rem;
+  color: var(--ink);
+}
+.sort-field select:focus{ border-color: var(--action); }
+.results-count{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+}
+.empty-state{
+  text-align:center;
+  padding: 64px 20px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+}
+.empty-state h3{ color: var(--ink); font-size: 1.1rem; margin-bottom: 8px; }
+.empty-state p{ font-size: 0.9rem; }
+
+/* ---------- BACK TO TOP ---------- */
+.back-to-top{
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--action);
+  color: #fff;
+  border: none;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  opacity:0;
+  transform: translateY(10px);
+  pointer-events:none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+  z-index: 60;
+  box-shadow: 0 12px 28px -14px rgba(27,35,31,0.5);
+}
+.back-to-top.visible{ opacity:1; transform: translateY(0); pointer-events:auto; }
+.back-to-top:hover{ background: var(--action-dark); }
+
+/* ---------- TOASTS ---------- */
+.toast-container{
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 80;
+}
+.toast{
+  background: var(--ink);
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  font-size: 0.86rem;
+  max-width: 320px;
+  box-shadow: 0 16px 32px -16px rgba(0,0,0,0.4);
+  opacity:0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.toast.in{ opacity:1; transform: translateY(0); }
+.toast-error{ background: #7A2E1E; }
+
+/* ---------- FAQ ACCORDION ---------- */
+.faq-item{ padding: 0; border-top:1px solid var(--line); }
+.faq-item:first-child{ border-top:none; }
+.faq-q{
+  width:100%;
+  text-align:left;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding: 22px 0;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family:'JetBrains Mono', monospace;
+  font-weight:700;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.faq-q .icon{
+  flex-shrink:0;
+  width: 20px; height:20px;
+  position: relative;
+}
+.faq-q .icon::before, .faq-q .icon::after{
+  content:"";
+  position:absolute;
+  background: var(--action);
+  transition: transform 0.25s ease;
+}
+.faq-q .icon::before{ left:0; top:9px; width:20px; height:1.6px; }
+.faq-q .icon::after{ left:9px; top:0; width:1.6px; height:20px; }
+.faq-item.open .faq-q .icon::after{ transform: rotate(90deg); opacity:0; }
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition: max-height 0.3s ease;
+}
+.faq-a p{ color: var(--ink-soft); font-size: 0.92rem; max-width: 68ch; padding-bottom: 22px; }
+
+/* ---------- FORM VALIDATION ---------- */
+.field.has-error input,
+.field.has-error textarea,
+.field.has-error select{
+  border-color: #B5432E;
+}
+.field-error{
+  font-size: 0.76rem;
+  color: #B5432E;
+  display:none;
+}
+.field.has-error .field-error{ display:block; }
+.hp-field{ position:absolute; left:-9999px; opacity:0; }
+.btn[disabled]{ opacity:0.6; cursor:not-allowed; }
+.btn .spinner{
+  width:14px; height:14px;
+  border-radius:50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color:#fff;
+  display:none;
+  animation: spin 0.7s linear infinite;
+}
+.btn.loading .spinner{ display:inline-block; }
+.btn.loading .btn-label{ opacity:0.85; }
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+/* ---------- SKIP LINK ---------- */
+.skip-link{
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--action);
+  color:#fff;
+  padding: 12px 18px;
+  z-index: 100;
+  border-radius: 0 0 var(--radius) 0;
+  font-size: 0.85rem;
+  font-weight:600;
+  text-decoration:none;
+}
+.skip-link:focus{ left: 0; }
+
+/* ---------- SR-ONLY (texto accesible, oculto visualmente) ---------- */
+.sr-only{
+  position:absolute;
+  width:1px; height:1px;
+  padding:0; margin:-1px;
+  overflow:hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border:0;
+}
+
+/* ---------- CLIENTES (logos reales, carrusel continuo) ----------
+   Enmarcado como panel (igual lenguaje que el resto del sitio) y
+   siempre en escala de grises — nunca revela el color propio de
+   cada logo, para no romper la paleta seria de la marca. */
+/* Banda a todo lo ancho (ya no una tarjeta flotando con borde propio) —
+   mismo lenguaje de "linea fina, no bloque" que el resto del sitio. */
+.clientes{
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 44px 0;
+}
+.clientes-label{
+  text-align:center;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.76rem; letter-spacing: 0.14em;
+  color: var(--ink-soft); text-transform: uppercase;
+  margin-bottom: 30px;
+}
+.clientes-marquee{
+  overflow:hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.clientes-track{
+  display:flex;
+  align-items:center;
+  width: max-content;
+  animation: clientes-scroll 34s linear infinite;
+}
+.clientes-marquee:hover .clientes-track{ animation-play-state: paused; }
+.clientes-item{
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  padding: 8px 56px;
+}
+.clientes-item img{
+  max-height: 44px; width:auto;
+  filter: grayscale(1) opacity(0.6);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.clientes-item img:hover{ opacity: 1; transform: translateY(-2px); }
+.clientes-item .cliente-text{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.86rem; letter-spacing: 0.06em;
+  color: var(--ink-soft); text-transform: uppercase;
+  white-space: nowrap;
+}
+@keyframes clientes-scroll{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+
+/* ---------- GALERÍA DE FOTOS (trabajo real en campo/obra) ----------
+   Mismo lenguaje que las tarjetas de servicio: fotos a sangre completa,
+   solo una linea fina de 1px entre celdas (sin marco individual), y una
+   leyenda minima siempre visible (no solo al hover, para que funcione
+   igual en movil) en vez del mosaico con borde + caption oculta de antes.
+   3 columnas en vez de 4 para que cada foto tenga mas presencia. ---------- */
+.foto-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 280px;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.foto-item{
+  position:relative;
+  overflow:hidden;
+  background: var(--paper-2);
+}
+.foto-item img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition: transform 0.6s cubic-bezier(.16,1,.3,1);
+}
+.foto-item:hover img{ transform: scale(1.06); }
+.foto-cap{
+  position:absolute; left:0; right:0; bottom:0;
+  padding: 14px 16px;
+  background: linear-gradient(to top, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.25) 60%, transparent 100%);
+  color:#fff;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- VIDEOS DE OBRA ---------- */
+.video-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:24px; }
+.video-card{ border:1px solid var(--line); border-radius: var(--radius); overflow:hidden; background:#0a0d0b; box-shadow: var(--shadow-card); }
+.video-card video{ width:100%; display:block; aspect-ratio: 16/9; object-fit:cover; background:#0a0d0b; }
+.video-card .video-cap{ padding: 14px 18px; background:#fff; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.video-card .video-cap span{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; color: var(--ink-soft); }
+
+/* ---------- VALORES CORPORATIVOS (grid auto-fit, reusa .cert-card) ---------- */
+.valores-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; }
+
+/* Collage de 2 fotos reales dentro de un .serv-visual (en vez de SVG) */
+/* Foto principal a sangre completa dentro de .serv-visual + una segunda
+   foto mas chica, en recuadro, que se asoma por la esquina — en vez de
+   partir las dos fotos a la mitad (lo que recortaba cada una demasiado),
+   la principal conserva casi todo su encuadre y la segunda es un acento.
+   Las fotos arrancan ocultas — "solo texto" como la seccion "In the
+   building" de thenest.pl — y aparecen al pulsar "Ver fotos" (inspirado
+   en esa misma referencia, pero sumando la opcion de ampliar que ahi no
+   existe). */
+.serv-visual.photo-duo{
+  aspect-ratio: 4/3;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  overflow: visible;
+  position: relative;
+}
+.serv-visual.photo-duo .sv-photos{
+  position:absolute; inset:0;
+  opacity:0;
+  transition: opacity 0.5s ease;
+  pointer-events:none;
+}
+.serv-visual.photo-duo.is-expanded .sv-photos{ opacity:1; pointer-events:auto; }
+.serv-visual.photo-duo .sv-main{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.serv-visual.photo-duo .sv-accent{
+  position:absolute;
+  right: -22px; bottom: -22px;
+  width: 44%;
+  aspect-ratio: 4/3;
+  object-fit:cover;
+  display:block;
+  border: 5px solid var(--paper-2);
+  outline: 1px solid var(--line);
+}
+.serv-visual.photo-duo .sv-expand{
+  position:absolute; inset:0; z-index:1;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  background: var(--paper-2);
+  border: none;
+  cursor:pointer;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.78rem; letter-spacing:0.03em; text-transform:uppercase;
+  color: var(--ink-soft);
+  transition: opacity 0.3s ease, color 0.2s ease;
+}
+.serv-visual.photo-duo .sv-expand svg{ transition: transform 0.25s ease; }
+.serv-visual.photo-duo .sv-expand:hover{ color: var(--action); }
+.serv-visual.photo-duo.is-expanded .sv-expand{ opacity:0; pointer-events:none; }
+
+/* Fotos reales dentro de .proy-map, reemplazando el mapa embebido */
+.proy-map{ height: 280px; }
+.proy-map img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+}
+.proy-card:hover .proy-map img{ transform: scale(1.06); }
+
+@media (max-width: 860px){
+  .foto-grid{ grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+  .video-grid{ grid-template-columns: 1fr; }
+  .serv-visual.photo-duo .sv-accent{ right: -12px; bottom: -12px; width: 48%; }
+  .stages-detailed .stage-item{ padding: 30px 24px 26px; }
+  .clientes-item{ padding: 8px 30px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{ transition: none; opacity:1; transform:none; filter:none; }
+  html{ scroll-behavior:auto; }
+  .bm-pulse::before{ animation: none; }
+  .hero-contours{ transition:none; }
+  .proy-card{ transition: none; }
+  .back-to-top{ transition:none; }
+  .serv-tile::before{ transition:none; opacity:0; }
+  .foto-item img, .video-card video, .proy-map img{ transition:none; }
+  .clientes-track{ animation: none; }
+  .scroll-progress{ transition: none; }
+  .carousel-cursor{ display:none; }
+  .stage-item{ transition:none; opacity:1; }
+  .stage-item h3{ transition:none; }
+}
