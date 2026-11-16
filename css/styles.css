@@ -171,6 +171,32 @@ footer .logo .mark{ height: 30px; }
 }
 .navcta:hover{ background: var(--action-dark); }
 
+/* Hamburguesa — oculta en escritorio, solo aparece en el breakpoint movil
+   de mas abajo (860px), donde reemplaza a .navlinks/.nav-right. */
+.menu-toggle{
+  display:none;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 0;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.menu-toggle span{
+  display:block;
+  width: 18px; height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+header.menu-open .menu-toggle span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+header.menu-open .menu-toggle span:nth-child(2){ opacity: 0; }
+header.menu-open .menu-toggle span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
 /* ---------- HERO (home) ---------- */
 /* Panel foto/video a todo lo ancho, de borde a borde — sin tarjeta
    flotante ni esquinas redondeadas, igual que el hero de purnatur.com. */
@@ -473,6 +499,7 @@ section{ padding: 96px 0; }
 
 @media (max-width: 640px){
   .serv-tile{ flex: 0 0 272px; min-height: 380px; }
+  .foot-grid{ grid-template-columns: 1fr; gap: 28px; }
 }
 
 /* ---------- Variante "detallada" de .stages (solo en servicios.html):
@@ -809,10 +836,11 @@ footer{
   padding: 56px 0 0;
 }
 .foot-grid{ display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+.foot-col{ min-width: 0; }
 .foot-col h4{ font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color: rgba(255,255,255,0.55); margin-bottom:14px; font-family:'JetBrains Mono', monospace; font-weight:500; }
-.foot-col a{ display:block; font-size:0.88rem; text-decoration:none; color: rgba(255,255,255,0.9); margin-bottom:10px; }
+.foot-col a{ display:block; font-size:0.88rem; text-decoration:none; color: rgba(255,255,255,0.9); margin-bottom:10px; overflow-wrap: anywhere; }
 .foot-col a:hover{ color: #fff; text-decoration: underline; }
-.foot-col p{ font-size:0.88rem; color: rgba(255,255,255,0.65); max-width: 32ch; }
+.foot-col p{ font-size:0.88rem; color: rgba(255,255,255,0.65); max-width: 32ch; overflow-wrap: anywhere; }
 footer .logo{ color: #fff; }
 footer .logo .sub{ color: rgba(255,255,255,0.55); }
 footer .copy-btn{ background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.85); }
@@ -825,7 +853,39 @@ footer .copy-btn{ background: rgba(255,255,255,0.1); border-color: rgba(255,255,
 .foot-bottom p{ font-size: 0.82rem; color: rgba(255,255,255,0.6); }
 
 @media (max-width: 860px){
-  .navlinks{ display:none; }
+  /* Nav movil: la barra queda solo con logo + hamburguesa; al abrir, los
+     links y los iconos/CTA se apilan debajo dentro de la misma barra
+     (flex-wrap, sin overlay ni posicionamiento absoluto) empujando el
+     contenido hacia abajo en vez de taparlo. */
+  nav.wrap{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    min-height: 76px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .menu-toggle{ display:flex; }
+  .navlinks, .nav-right{ display:none; width:100%; }
+  header.menu-open .navlinks,
+  header.menu-open .nav-right{
+    display:flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .navlinks{ order:3; gap:0; align-items:stretch; padding-top: 10px; }
+  .navlinks a{ padding: 14px 2px; border-bottom: 1px solid var(--line); }
+  .nav-right{
+    order:4;
+    gap: 16px;
+    padding: 18px 0 6px;
+    border-top: 1px solid var(--line);
+    margin-top: 6px;
+  }
+  .nav-icons{ justify-content:center; gap:20px; }
+  .navcta{ text-align:center; }
   .serv-grid{ grid-template-columns: 1fr; }
   .stages-detailed .stage-detail{ grid-template-columns: 1fr; }
   .stats-grid{ grid-template-columns: repeat(2,1fr); }
@@ -922,7 +982,7 @@ header.scrolled{ background: rgba(255,255,255,0.98); border-bottom-color: var(--
   letter-spacing: 0.02em;
 }
 
-.copy-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.copy-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
 .copy-btn{
   border: 1px solid var(--line-strong);
   background: #fff;

@@ -42,6 +42,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  /* Menu movil (hamburguesa): en el breakpoint de 860px .navlinks y
+     .nav-right pasan a ocultarse por CSS hasta que header tiene
+     .menu-open — este boton es el unico que la agrega/quita. */
+  const menuToggle = document.querySelector('.menu-toggle');
+  if(header && menuToggle){
+    const closeMenu = () => {
+      header.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    };
+    menuToggle.addEventListener('click', () => {
+      const open = header.classList.toggle('menu-open');
+      menuToggle.setAttribute('aria-expanded', String(open));
+    });
+    header.querySelectorAll('.navlinks a, .nav-right a').forEach(a => {
+      a.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeMenu();
+    });
+    window.addEventListener('resize', () => {
+      if(window.innerWidth > 860) closeMenu();
+    });
+  }
+
   /* Reveal on scroll, with stagger per container */
   const seen = new Map();
   document.querySelectorAll('.reveal').forEach(el => {
