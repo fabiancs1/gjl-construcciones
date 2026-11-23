@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body data-page="contacto">
 <a href="#main" class="skip-link">Saltar al contenido</a>
 
 <header>
@@ -29,10 +29,10 @@
     </div>
     <div class="nav-right">
       <div class="nav-icons">
-        <a href="https://wa.me/573163106564" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="WhatsApp">
+        <a href="https://wa.me/573163106564" data-contact-href="whatsapp_url" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.42a9.87 9.87 0 0 0 4.62 1.18h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.26.86 5.82 2.41a8.23 8.23 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.55 3.7-8.24 8.25-8.24m-4.52 4.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.7 2.6 4.14 3.63.58.24 1.03.39 1.38.5.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.05.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.44-.71-1.66-.79-.22-.08-.39-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.44-1.34-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42Z"/></svg>
         </a>
-        <a href="tel:+573163106564" class="nav-icon-btn" aria-label="Llamar">
+        <a href="tel:+573163106564" data-contact-href="tel1_href" class="nav-icon-btn" aria-label="Llamar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </a>
       </div>
@@ -49,9 +49,9 @@
   </svg>
   <div class="page-hero-inner">
     <div class="breadcrumb"><a href="index.html">Inicio</a><span class="sep">/</span>Contacto</div>
-    <div class="eyebrow">Hablemos de su proyecto</div>
-    <h1>Cuéntenos sobre su próxima obra</h1>
-    <p class="lead">Respondemos con una propuesta técnica preliminar en un plazo máximo de 48 horas.</p>
+    <div class="eyebrow" data-cms="hero_eyebrow">Hablemos de su proyecto</div>
+    <h1 data-cms="hero_title">Cuéntenos sobre su próxima obra</h1>
+    <p class="lead" data-cms="hero_lead">Respondemos con una propuesta técnica preliminar en un plazo máximo de 48 horas.</p>
   </div>
 </section>
 
@@ -60,38 +60,38 @@
     <div class="contacto-info reveal">
       <div class="item">
         <div class="l">Oficina principal</div>
-        <div class="v">Av 5 # 4-109, Urb. Molinos del Norte, Cúcuta, Norte de Santander</div>
+        <div class="v" data-contact="address_full">Av 5 # 4-109, Urb. Molinos del Norte, Cúcuta, Norte de Santander</div>
       </div>
       <div class="item">
         <div class="l">Correo</div>
         <div class="copy-row">
-          <div class="v">gjlconstrucciones@gmail.com</div>
-          <button class="copy-btn" data-copy="gjlconstrucciones@gmail.com" aria-label="Copiar correo">Copiar</button>
+          <div class="v" data-contact="email">gjlconstrucciones@gmail.com</div>
+          <button class="copy-btn" data-copy="gjlconstrucciones@gmail.com" data-contact="email" data-contact-attr="data-copy" aria-label="Copiar correo">Copiar</button>
         </div>
       </div>
       <div class="item">
         <div class="l">Teléfono</div>
         <div class="copy-row">
-          <div class="v">316 310 65 64</div>
-          <button class="copy-btn" data-copy="+573163106564" aria-label="Copiar teléfono">Copiar</button>
+          <div class="v" data-contact="tel1_display">316 310 65 64</div>
+          <button class="copy-btn" data-copy="+573163106564" data-contact="tel1_e164" data-contact-attr="data-copy" aria-label="Copiar teléfono">Copiar</button>
         </div>
         <div class="copy-row" style="margin-top:8px;">
-          <div class="v">304 568 55 60</div>
-          <button class="copy-btn" data-copy="+573045685560" aria-label="Copiar teléfono alterno">Copiar</button>
+          <div class="v" data-contact="tel2_display">304 568 55 60</div>
+          <button class="copy-btn" data-copy="+573045685560" data-contact="tel2_e164" data-contact-attr="data-copy" aria-label="Copiar teléfono alterno">Copiar</button>
         </div>
       </div>
       <div class="item">
         <div class="l">Horario de atención</div>
-        <div class="v">Lunes a viernes, 7:00 a.m. – 5:00 p.m.</div>
+        <div class="v" data-contact="hours">Lunes a viernes, 7:00 a.m. – 5:00 p.m.</div>
       </div>
       <div class="item">
         <div class="l">Cobertura</div>
-        <div class="v">Cúcuta y municipios de Norte de Santander</div>
+        <div class="v" data-contact="coverage">Cúcuta y municipios de Norte de Santander</div>
       </div>
 
       <div class="map-embed-wrap">
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-72.5579,7.8391,-72.4579,7.9391&layer=mapnik&marker=7.8939,-72.5078" loading="lazy" title="Ubicación oficina GJL Construcciones en Cúcuta"></iframe>
-        <div class="map-caption">Oficina principal · Molinos del Norte, Cúcuta</div>
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-72.5579,7.8391,-72.4579,7.9391&layer=mapnik&marker=7.8939,-72.5078" data-contact="map_iframe_src" data-contact-attr="src" loading="lazy" title="Ubicación oficina GJL Construcciones en Cúcuta"></iframe>
+        <div class="map-caption" data-contact="map_caption">Oficina principal · Molinos del Norte, Cúcuta</div>
       </div>
     </div>
 
@@ -143,24 +143,24 @@
 <section class="faq">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Preguntas frecuentes</div>
-      <h2>Antes de escribirnos</h2>
+      <div class="eyebrow" data-cms="faq_eyebrow">Preguntas frecuentes</div>
+      <h2 data-cms="faq_title">Antes de escribirnos</h2>
     </div>
     <div class="faq-item reveal">
-      <button class="faq-q"><span>¿En qué zonas trabajan actualmente?</span><span class="icon"></span></button>
-      <div class="faq-a"><p>Tenemos operación activa en Cúcuta y municipios de Norte de Santander, como Chinácota. Para otras zonas del país, evaluamos el alcance según el proyecto.</p></div>
+      <button class="faq-q"><span data-cms="faq1_q">¿En qué zonas trabajan actualmente?</span><span class="icon"></span></button>
+      <div class="faq-a"><p data-cms="faq1_a">Tenemos operación activa en Cúcuta y municipios de Norte de Santander, como Chinácota. Para otras zonas del país, evaluamos el alcance según el proyecto.</p></div>
     </div>
     <div class="faq-item reveal">
-      <button class="faq-q"><span>¿Trabajan solo mano de obra, o también suministran materiales?</span><span class="icon"></span></button>
-      <div class="faq-a"><p>Trabajamos principalmente con mano de obra calificada para constructoras y urbanizadoras. Para cada proyecto evaluamos si el alcance incluye también suministro de materiales.</p></div>
+      <button class="faq-q"><span data-cms="faq2_q">¿Trabajan solo mano de obra, o también suministran materiales?</span><span class="icon"></span></button>
+      <div class="faq-a"><p data-cms="faq2_a">Trabajamos principalmente con mano de obra calificada para constructoras y urbanizadoras. Para cada proyecto evaluamos si el alcance incluye también suministro de materiales.</p></div>
     </div>
     <div class="faq-item reveal">
-      <button class="faq-q"><span>¿Pueden trabajar directamente con una entidad pública?</span><span class="icon"></span></button>
-      <div class="faq-a"><p>Sí. Trabajamos tanto con entidades públicas de forma directa, como con constructoras y urbanizadoras privadas que requieren subcontratar un frente de obra o un levantamiento topográfico.</p></div>
+      <button class="faq-q"><span data-cms="faq3_q">¿Pueden trabajar directamente con una entidad pública?</span><span class="icon"></span></button>
+      <div class="faq-a"><p data-cms="faq3_a">Sí. Trabajamos tanto con entidades públicas de forma directa, como con constructoras y urbanizadoras privadas que requieren subcontratar un frente de obra o un levantamiento topográfico.</p></div>
     </div>
     <div class="faq-item reveal">
-      <button class="faq-q"><span>¿Cuánto tiempo toma un levantamiento topográfico?</span><span class="icon"></span></button>
-      <div class="faq-a"><p>Depende del área y la complejidad del terreno. En la propuesta técnica preliminar incluimos siempre un cronograma estimado.</p></div>
+      <button class="faq-q"><span data-cms="faq4_q">¿Cuánto tiempo toma un levantamiento topográfico?</span><span class="icon"></span></button>
+      <div class="faq-a"><p data-cms="faq4_a">Depende del área y la complejidad del terreno. En la propuesta técnica preliminar incluimos siempre un cronograma estimado.</p></div>
     </div>
   </div>
 </section>
@@ -190,11 +190,11 @@
       <div class="foot-col">
         <h4>Contacto</h4>
         <div class="copy-row" style="margin-bottom:10px;">
-          <a href="mailto:gjlconstrucciones@gmail.com" style="margin-bottom:0;">gjlconstrucciones@gmail.com</a>
-          <button class="copy-btn" data-copy="gjlconstrucciones@gmail.com" aria-label="Copiar correo">Copiar</button>
+          <a href="mailto:gjlconstrucciones@gmail.com" data-contact="email" data-contact-href="email_href" style="margin-bottom:0;">gjlconstrucciones@gmail.com</a>
+          <button class="copy-btn" data-copy="gjlconstrucciones@gmail.com" data-contact="email" data-contact-attr="data-copy" aria-label="Copiar correo">Copiar</button>
         </div>
-        <a href="tel:+573163106564">316 310 65 64</a>
-        <p>Av 5 # 4-109, Urb. Molinos del Norte, Cúcuta</p>
+        <a href="tel:+573163106564" data-contact="tel1_display" data-contact-href="tel1_href">316 310 65 64</a>
+        <p data-contact="address_short">Av 5 # 4-109, Urb. Molinos del Norte, Cúcuta</p>
       </div>
     </div>
   </div>
@@ -206,6 +206,9 @@
   </div>
 </footer>
 
+<script src="js/contact-data.js"></script>
+<script src="js/content-data.js"></script>
+<script src="js/cms.js"></script>
 <script src="js/common.js" defer></script>
 <script src="js/contacto.js" defer></script>
 </body>

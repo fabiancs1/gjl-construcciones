@@ -1,7 +1,7 @@
 /**
  * data.js — Fuente única de datos de proyectos del sitio GJL Construcciones.
- * Mantener el contenido aquí permite escalar (agregar/editar proyectos)
- * sin tocar el HTML ni la lógica de render.
+ * Generado por el panel de administración (admin/publish.php) — no editar a mano,
+ * los cambios se pierden en la próxima publicación. Editar desde admin/proyectos.php.
  */
 const GJL_PROJECTS = [
   {
@@ -14,11 +14,7 @@ const GJL_PROJECTS = [
     alcance: "Mano de obra para la construcción de 16 viviendas residenciales.",
     estado: "entregado",
     estadoLabel: "Entregado",
-    fotos: [
-      { src: "img/obra/bonaire-01-viviendas.jpg", alt: "Viviendas en construcción, urbanización Tenerife" },
-      { src: "img/obra/bonaire-02-cimentacion.jpg", alt: "Cimentación de una de las viviendas" },
-      { src: "img/obra/bonaire-03-via-interna.jpg", alt: "Vía interna pavimentada entre viviendas" }
-    ]
+    fotos: [{ src: "img/obra/bonaire-01-viviendas.jpg", alt: "Viviendas en construcción, urbanización Tenerife" }, { src: "img/obra/bonaire-02-cimentacion.jpg", alt: "Cimentación de una de las viviendas" }, { src: "img/obra/bonaire-03-via-interna.jpg", alt: "Vía interna pavimentada entre viviendas" }]
   },
   {
     id: "bellagro-tramontti",
@@ -30,9 +26,7 @@ const GJL_PROJECTS = [
     alcance: "Mano de obra para la construcción de cajas sanitarias.",
     estado: "entregado",
     estadoLabel: "Entregado",
-    fotos: [
-      { src: "img/obra/bellagro-01-caja-sanitaria.jpg", alt: "Caja sanitaria en excavación, proyecto Tramontti" }
-    ]
+    fotos: [{ src: "img/obra/bellagro-01-caja-sanitaria.jpg", alt: "Caja sanitaria en excavación, proyecto Tramontti" }]
   },
   {
     id: "alamos-chinacota",
@@ -44,11 +38,7 @@ const GJL_PROJECTS = [
     alcance: "Mano de obra para la construcción de redes de acueducto.",
     estado: "entregado",
     estadoLabel: "Entregado",
-    fotos: [
-      { src: "img/obra/alamos-01-red-acueducto.jpg", alt: "Instalación de tubería de acueducto" },
-      { src: "img/obra/alamos-02-red-acueducto.jpg", alt: "Trabajadores instalando red de acueducto" },
-      { src: "img/obra/alamos-03-excavacion.jpg", alt: "Excavación manual para red de acueducto" }
-    ]
+    fotos: [{ src: "img/obra/alamos-01-red-acueducto.jpg", alt: "Instalación de tubería de acueducto" }, { src: "img/obra/alamos-02-red-acueducto.jpg", alt: "Trabajadores instalando red de acueducto" }, { src: "img/obra/alamos-03-excavacion.jpg", alt: "Excavación manual para red de acueducto" }]
   }
 ];
 

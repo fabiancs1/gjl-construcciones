@@ -1,5 +1,34 @@
 // ---------- GJL Construcciones · common.js ----------
+
+/* Rellena cualquier elemento marcado [data-contact]/[data-contact-href] con
+   los valores de window.GJL_CONTACT (generado por admin/publish.php a partir
+   de la base del panel) — así los teléfonos/correo/dirección/mapa, repetidos
+   en 5-6 páginas, se actualizan todos desde un solo lugar sin tocar HTML. */
+function applyContactData(){
+  if(typeof window.GJL_CONTACT === 'undefined') return;
+  const c = window.GJL_CONTACT;
+
+  document.querySelectorAll('[data-contact]').forEach(el => {
+    const key = el.getAttribute('data-contact');
+    if(!(key in c)) return;
+    const tpl = el.getAttribute('data-contact-tpl');
+    const text = tpl ? tpl.replace('{v}', c[key]) : c[key];
+    const attr = el.getAttribute('data-contact-attr');
+    if(attr){ el.setAttribute(attr, text); }
+    else { el.textContent = text; }
+  });
+
+  document.querySelectorAll('[data-contact-href]').forEach(el => {
+    const spec = el.getAttribute('data-contact-href').split('|');
+    const key = spec[0];
+    const tpl = spec[1];
+    if(!(key in c)) return;
+    el.href = tpl ? tpl.replace('{v}', c[key]) : c[key];
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  applyContactData();
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -16,6 +45,26 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: 0.1 });
     heroVideoIo.observe(heroVideo);
+  }
+
+  /* Parallax sutil de la foto del hero: se desplaza una fraccion del
+     scroll de la pagina (clamp +/-40px), solo en escritorio y solo sin
+     prefers-reduced-motion — en movil .hero-bg vuelve a su escala normal
+     por CSS y aqui ni se engancha el listener. La base ya viene a
+     scale(1.08) por CSS para que el desplazamiento nunca descubra un
+     borde dentro de .hero{overflow:hidden}. */
+  const heroBg = document.querySelector('.hero-bg');
+  if(heroBg && !prefersReduced && canAutoplayVideo){
+    const updateHeroParallax = () => {
+      const section = heroBg.closest('.hero');
+      if(!section) return;
+      const rect = section.getBoundingClientRect();
+      if(rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const shift = Math.max(-40, Math.min(40, window.scrollY * 0.08));
+      heroBg.style.transform = `translateY(${shift}px) scale(1.08)`;
+    };
+    window.addEventListener('scroll', updateHeroParallax, { passive:true });
+    updateHeroParallax();
   }
 
   /* Barra fina de progreso de lectura, fija arriba de todo — un toque
@@ -384,19 +433,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => {
     topBtn.classList.toggle('visible', window.scrollY > 480);
   }, { passive: true });
-
-  /* Botón "Ver fotos" de cada servicio (servicios.html) — arranca solo
-     con texto, igual que la sección "In the building" de thenest.pl, y
-     la foto aparece al pulsar (eso sí, no estaba en la referencia). */
-  document.querySelectorAll('.serv-visual.photo-duo .sv-expand').forEach(btn => {
-    const visual = btn.closest('.serv-visual');
-    const label = btn.querySelector('.sv-expand-label');
-    btn.addEventListener('click', () => {
-      const isOpen = visual.classList.toggle('is-expanded');
-      btn.setAttribute('aria-expanded', String(isOpen));
-      if(label) label.textContent = isOpen ? 'Ocultar fotos' : 'Ver fotos';
-    });
-  });
 
   /* FAQ accordion */
   document.querySelectorAll('.faq-item').forEach(item => {

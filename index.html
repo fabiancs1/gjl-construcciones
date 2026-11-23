@@ -14,37 +14,50 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
-<script type="application/ld+json">
+<script type="application/ld+json" id="ld-local-business">
 {
-  "@context": "https://schema.org",
-  "@type": "GeneralContractor",
-  "name": "GJL Construcciones S.A.S.",
-  "description": "Empresa de construcción de obra civil, movimiento de tierras, obra blanca, topografía, ingeniería y gestión de proyectos en Cúcuta y Norte de Santander.",
-  "telephone": ["+573163106564", "+573045685560"],
-  "email": "gjlconstrucciones@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Av 5 # 4-109, Urb. Molinos del Norte",
-    "addressLocality": "Cúcuta",
-    "addressRegion": "Norte de Santander",
-    "addressCountry": "CO"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 7.8939,
-    "longitude": -72.5078
-  },
-  "areaServed": ["Cúcuta", "Chinácota", "Norte de Santander"],
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    "opens": "07:00",
-    "closes": "17:00"
-  }
+    "@context": "https://schema.org",
+    "@type": "GeneralContractor",
+    "name": "GJL Construcciones S.A.S.",
+    "description": "Empresa de construcción de obra civil, movimiento de tierras, obra blanca, topografía, ingeniería y gestión de proyectos en Cúcuta y Norte de Santander.",
+    "telephone": [
+        "+573163106564",
+        "+573045685560"
+    ],
+    "email": "gjlconstrucciones@gmail.com",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av 5 # 4-109, Urb. Molinos del Norte",
+        "addressLocality": "Cúcuta",
+        "addressRegion": "Norte de Santander",
+        "addressCountry": "CO"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 7.8939,
+        "longitude": -72.5078
+    },
+    "areaServed": [
+        "Cúcuta",
+        "Chinácota",
+        "Norte de Santander"
+    ],
+    "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "opens": "07:00",
+        "closes": "17:00"
+    }
 }
 </script>
 </head>
-<body>
+<body data-page="index">
 <a href="#main" class="skip-link">Saltar al contenido</a>
 
 <header>
@@ -61,10 +74,10 @@
     </div>
     <div class="nav-right">
       <div class="nav-icons">
-        <a href="https://wa.me/573163106564" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="WhatsApp">
+        <a href="https://wa.me/573163106564" data-contact-href="whatsapp_url" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.42a9.87 9.87 0 0 0 4.62 1.18h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.26.86 5.82 2.41a8.23 8.23 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.55 3.7-8.24 8.25-8.24m-4.52 4.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.7 2.6 4.14 3.63.58.24 1.03.39 1.38.5.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.05.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.44-.71-1.66-.79-.22-.08-.39-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.44-1.34-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42Z"/></svg>
         </a>
-        <a href="tel:+573163106564" class="nav-icon-btn" aria-label="Llamar">
+        <a href="tel:+573163106564" data-contact-href="tel1_href" class="nav-icon-btn" aria-label="Llamar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </a>
       </div>
@@ -75,12 +88,16 @@
 
 <main id="main">
 <section class="hero">
-  <img class="hero-bg" src="img/hero-static.jpg" alt="Levantamiento topográfico con estación total sobre un valle con frente de obra y maquinaria de movimiento de tierras" width="1670" height="942">
+  <img class="hero-bg" data-cms-image="hero_bg" src="img/hero-static.jpg" alt="Levantamiento topográfico con estación total sobre un valle con frente de obra y maquinaria de movimiento de tierras" width="1670" height="942">
   <div class="hero-video-overlay" aria-hidden="true"></div>
-  <h1 class="sr-only">GJL Construcciones — Obra civil y topografía en Cúcuta, con precisión de punto exacto</h1>
 
   <div class="hero-inner">
     <div class="hero-panel">
+      <div class="hero-text reveal">
+        <div class="eyebrow" data-cms="hero_eyebrow">Obra civil · Topografía · Cúcuta</div>
+        <h1 data-cms="hero_title">Construcción y topografía con precisión de punto exacto</h1>
+        <p class="lead" data-cms="hero_lead">Desde el levantamiento del terreno hasta la entrega de la obra, documentamos cada fase con mano de obra calificada en Cúcuta y Norte de Santander.</p>
+      </div>
       <div class="benchmark-card">
         <div class="bm-top">
           <span class="bm-label">Oficina principal</span>
@@ -90,12 +107,7 @@
           <span class="bm-pulse"></span>
           7.8939°, <span>-72.5078°</span>
         </div>
-        <div class="bm-meta">Av 5 # 4-109, Urb. Molinos del Norte · Datum MAGNA-SIRGAS</div>
-        <div class="bm-grid">
-          <div><span class="n">11</span><span class="l">Líneas de servicio</span></div>
-          <div><span class="n">3</span><span class="l">Clientes corporativos</span></div>
-          <div><span class="n">2</span><span class="l">Municipios con obra</span></div>
-        </div>
+        <div class="bm-meta"><span data-contact="address_street">Av 5 # 4-109, Urb. Molinos del Norte</span> · Datum MAGNA-SIRGAS</div>
       </div>
       <div class="hero-ctas">
         <a href="contacto.html" class="btn btn-primary">Solicitar cotización</a>
@@ -105,16 +117,42 @@
   </div>
 </section>
 
+<section class="why-us">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-cms="why_eyebrow">Por qué GJL</div>
+      <h2 data-cms="why_title">Tres principios que no negociamos</h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <span class="cert-tag">Valor corporativo</span>
+        <h3 data-cms="valor1_title">Calidad y precisión</h3>
+        <p data-cms="valor1_desc">Ejecutamos cada proyecto con los más altos estándares de calidad y precisión.</p>
+      </div>
+      <div class="cert-card reveal">
+        <span class="cert-tag">Valor corporativo</span>
+        <h3 data-cms="valor2_title">Seguridad primero</h3>
+        <p data-cms="valor2_desc">La seguridad de nuestros trabajadores, clientes y comunidades es nuestra prioridad número uno.</p>
+      </div>
+      <div class="cert-card reveal">
+        <span class="cert-tag">Valor corporativo</span>
+        <h3 data-cms="valor3_title">Compromiso con el cliente</h3>
+        <p data-cms="valor3_desc">Escuchamos y comprendemos las necesidades de nuestros clientes para superar sus expectativas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="clientes reveal">
-  <div class="clientes-label wrap">Han confiado en nosotros</div>
+  <div class="clientes-label wrap" data-cms="clientes_label">Han confiado en nosotros</div>
   <div class="clientes-marquee">
     <div class="clientes-track">
-      <div class="clientes-item"><img src="img/clientes/moresa.png" alt="Constructora Moresa" loading="lazy"></div>
-      <div class="clientes-item"><span class="cliente-text">Urbanizadora Bonaire S.A.S.</span></div>
-      <div class="clientes-item"><img src="img/clientes/inurco.png" alt="Grupo Inurco · Ingeniería, Urbanismo y Construcción" loading="lazy"></div>
-      <div class="clientes-item" aria-hidden="true"><img src="img/clientes/moresa.png" alt="" loading="lazy"></div>
-      <div class="clientes-item" aria-hidden="true"><span class="cliente-text">Urbanizadora Bonaire S.A.S.</span></div>
-      <div class="clientes-item" aria-hidden="true"><img src="img/clientes/inurco.png" alt="" loading="lazy"></div>
+      <div class="clientes-item"><img data-cms-image="cliente1_img" src="img/clientes/moresa.png" alt="Constructora Moresa" loading="lazy"></div>
+      <div class="clientes-item"><span class="cliente-text" data-cms="cliente2_text">Urbanizadora Bonaire S.A.S.</span></div>
+      <div class="clientes-item"><img data-cms-image="cliente3_img" src="img/clientes/inurco.png" alt="Grupo Inurco · Ingeniería, Urbanismo y Construcción" loading="lazy"></div>
+      <div class="clientes-item" aria-hidden="true"><img data-cms-image="cliente1_img" data-cms-mirror="true" src="img/clientes/moresa.png" alt="" loading="lazy"></div>
+      <div class="clientes-item" aria-hidden="true"><span class="cliente-text" data-cms="cliente2_text" data-cms-mirror="true">Urbanizadora Bonaire S.A.S.</span></div>
+      <div class="clientes-item" aria-hidden="true"><img data-cms-image="cliente3_img" data-cms-mirror="true" src="img/clientes/inurco.png" alt="" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -122,9 +160,9 @@
 <section class="servicios" id="servicios">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Servicios</div>
-      <h2>Del movimiento de tierras a la entrega final</h2>
-      <p>Acompañamos cada fase del proyecto de construcción, desde el levantamiento topográfico hasta el cierre documentado de la obra.</p>
+      <div class="eyebrow" data-cms="servicios_eyebrow">Servicios</div>
+      <h2 data-cms="servicios_title">Del movimiento de tierras a la entrega final</h2>
+      <p data-cms="servicios_lead">Acompañamos cada fase del proyecto de construcción, desde el levantamiento topográfico hasta el cierre documentado de la obra.</p>
     </div>
 
     <div class="serv-carousel">
@@ -133,8 +171,8 @@
           <span class="serv-tile-num">01 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Construcción</span>
-            <h3>Construcción de obra civil</h3>
-            <p>Viviendas, edificios comerciales e infraestructura urbana, de la cimentación a la entrega.</p>
+            <h3 data-cms="serv1_title">Construcción de obra civil</h3>
+            <p data-cms="serv1_desc">Viviendas, edificios comerciales e infraestructura urbana, de la cimentación a la entrega.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -142,8 +180,8 @@
           <span class="serv-tile-num">02 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Obra gris</span>
-            <h3>Movimiento de tierras y cimentación</h3>
-            <p>Excavación, nivelación, relleno y compactación; cimentaciones y estructuras de concreto.</p>
+            <h3 data-cms="serv2_title">Movimiento de tierras y cimentación</h3>
+            <p data-cms="serv2_desc">Excavación, nivelación, relleno y compactación; cimentaciones y estructuras de concreto.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -151,8 +189,8 @@
           <span class="serv-tile-num">03 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Acabados</span>
-            <h3>Obra blanca y acabados</h3>
-            <p>Revestimientos, pintura, pisos, carpintería, electricidad e instalaciones hidráulicas.</p>
+            <h3 data-cms="serv3_title">Obra blanca y acabados</h3>
+            <p data-cms="serv3_desc">Revestimientos, pintura, pisos, carpintería, electricidad e instalaciones hidráulicas.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -160,8 +198,8 @@
           <span class="serv-tile-num">04 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Campo y control</span>
-            <h3>Topografía y geotecnia</h3>
-            <p>Levantamientos con estación total y GNSS-RTK, estudios de suelos y mecánica de suelos.</p>
+            <h3 data-cms="serv4_title">Topografía y geotecnia</h3>
+            <p data-cms="serv4_desc">Levantamientos con estación total y GNSS-RTK, estudios de suelos y mecánica de suelos.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -169,8 +207,8 @@
           <span class="serv-tile-num">05 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Diseño técnico</span>
-            <h3>Ingeniería civil, eléctrica y mecánica</h3>
-            <p>Diseño de vialidades, redes hidrosanitarias, instalaciones eléctricas y climatización.</p>
+            <h3 data-cms="serv5_title">Ingeniería civil, eléctrica y mecánica</h3>
+            <p data-cms="serv5_desc">Diseño de vialidades, redes hidrosanitarias, instalaciones eléctricas y climatización.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -178,8 +216,8 @@
           <span class="serv-tile-num">06 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Administración de obra</span>
-            <h3>Gestión, supervisión y consultoría</h3>
-            <p>Planificación, presupuestos, permisos, control de calidad y peritajes técnicos.</p>
+            <h3 data-cms="serv6_title">Gestión, supervisión y consultoría</h3>
+            <p data-cms="serv6_desc">Planificación, presupuestos, permisos, control de calidad y peritajes técnicos.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -187,8 +225,8 @@
           <span class="serv-tile-num">01 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Construcción</span>
-            <h3>Construcción de obra civil</h3>
-            <p>Viviendas, edificios comerciales e infraestructura urbana, de la cimentación a la entrega.</p>
+            <h3 data-cms="serv1_title" data-cms-mirror="true">Construcción de obra civil</h3>
+            <p data-cms="serv1_desc" data-cms-mirror="true">Viviendas, edificios comerciales e infraestructura urbana, de la cimentación a la entrega.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -196,8 +234,8 @@
           <span class="serv-tile-num">02 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Obra gris</span>
-            <h3>Movimiento de tierras y cimentación</h3>
-            <p>Excavación, nivelación, relleno y compactación; cimentaciones y estructuras de concreto.</p>
+            <h3 data-cms="serv2_title" data-cms-mirror="true">Movimiento de tierras y cimentación</h3>
+            <p data-cms="serv2_desc" data-cms-mirror="true">Excavación, nivelación, relleno y compactación; cimentaciones y estructuras de concreto.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -205,8 +243,8 @@
           <span class="serv-tile-num">03 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Acabados</span>
-            <h3>Obra blanca y acabados</h3>
-            <p>Revestimientos, pintura, pisos, carpintería, electricidad e instalaciones hidráulicas.</p>
+            <h3 data-cms="serv3_title" data-cms-mirror="true">Obra blanca y acabados</h3>
+            <p data-cms="serv3_desc" data-cms-mirror="true">Revestimientos, pintura, pisos, carpintería, electricidad e instalaciones hidráulicas.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -214,8 +252,8 @@
           <span class="serv-tile-num">04 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Campo y control</span>
-            <h3>Topografía y geotecnia</h3>
-            <p>Levantamientos con estación total y GNSS-RTK, estudios de suelos y mecánica de suelos.</p>
+            <h3 data-cms="serv4_title" data-cms-mirror="true">Topografía y geotecnia</h3>
+            <p data-cms="serv4_desc" data-cms-mirror="true">Levantamientos con estación total y GNSS-RTK, estudios de suelos y mecánica de suelos.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -223,8 +261,8 @@
           <span class="serv-tile-num">05 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Diseño técnico</span>
-            <h3>Ingeniería civil, eléctrica y mecánica</h3>
-            <p>Diseño de vialidades, redes hidrosanitarias, instalaciones eléctricas y climatización.</p>
+            <h3 data-cms="serv5_title" data-cms-mirror="true">Ingeniería civil, eléctrica y mecánica</h3>
+            <p data-cms="serv5_desc" data-cms-mirror="true">Diseño de vialidades, redes hidrosanitarias, instalaciones eléctricas y climatización.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -232,8 +270,8 @@
           <span class="serv-tile-num">06 — 06</span>
           <div class="serv-tile-body">
             <span class="serv-tile-tag">Administración de obra</span>
-            <h3>Gestión, supervisión y consultoría</h3>
-            <p>Planificación, presupuestos, permisos, control de calidad y peritajes técnicos.</p>
+            <h3 data-cms="serv6_title" data-cms-mirror="true">Gestión, supervisión y consultoría</h3>
+            <p data-cms="serv6_desc" data-cms-mirror="true">Planificación, presupuestos, permisos, control de calidad y peritajes técnicos.</p>
             <span class="serv-tile-cta">Ver servicio →</span>
           </div>
         </a>
@@ -246,10 +284,10 @@
 <section class="stats">
   <div class="wrap">
     <div class="stats-grid">
-      <div class="stat reveal"><span class="num">11</span><span class="lbl">Líneas de servicio integradas</span></div>
-      <div class="stat reveal"><span class="num">3</span><span class="lbl">Clientes corporativos</span></div>
-      <div class="stat reveal"><span class="num">2</span><span class="lbl">Municipios con obra documentada</span></div>
-      <div class="stat reveal"><span class="num">10</span><span class="lbl">Valores corporativos que guían cada obra</span></div>
+      <div class="stat reveal"><span class="num" data-cms="stat1_num">11</span><span class="lbl" data-cms="stat1_lbl">Líneas de servicio integradas</span></div>
+      <div class="stat reveal"><span class="num" data-cms="stat2_num">3</span><span class="lbl" data-cms="stat2_lbl">Clientes corporativos</span></div>
+      <div class="stat reveal"><span class="num" data-cms="stat3_num">2</span><span class="lbl" data-cms="stat3_lbl">Municipios con obra documentada</span></div>
+      <div class="stat reveal"><span class="num" data-cms="stat4_num">10</span><span class="lbl" data-cms="stat4_lbl">Valores corporativos que guían cada obra</span></div>
     </div>
   </div>
 </section>
@@ -257,9 +295,9 @@
 <section id="proyectos-destacados">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Proyectos</div>
-      <h2>Obras con registro fotográfico real</h2>
-      <p>Una muestra de los proyectos que hemos ejecutado para clientes públicos y privados en Norte de Santander.</p>
+      <div class="eyebrow" data-cms="proyectos_eyebrow">Proyectos</div>
+      <h2 data-cms="proyectos_title">Obras con registro fotográfico real</h2>
+      <p data-cms="proyectos_lead">Una muestra de los proyectos que hemos ejecutado para clientes públicos y privados en Norte de Santander.</p>
     </div>
 
     <div class="proy-grid">
@@ -304,7 +342,7 @@
   <span class="mission-mark" aria-hidden="true">“</span>
   <div class="wrap mission-inner reveal">
     <div class="eyebrow">Nuestra misión</div>
-    <blockquote>Brindar soluciones integrales en construcción, garantizando calidad, seguridad y cumplimiento, con tecnología, mano de obra calificada y un firme compromiso con la satisfacción del cliente.</blockquote>
+    <blockquote data-cms="mission_quote">Brindar soluciones integrales en construcción, garantizando calidad, seguridad y cumplimiento, con tecnología, mano de obra calificada y un firme compromiso con la satisfacción del cliente.</blockquote>
     <div class="mission-author">GJL Construcciones S.A.S.<span>Misión corporativa</span></div>
   </div>
 </section>
@@ -312,18 +350,18 @@
 <section id="galeria">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Galería</div>
-      <h2>Trabajo real en campo y en obra</h2>
-      <p>Registro fotográfico propio de nuestros equipos de topografía y de los frentes de obra en ejecución.</p>
+      <div class="eyebrow" data-cms="galeria_eyebrow">Galería</div>
+      <h2 data-cms="galeria_title">Trabajo real en campo y en obra</h2>
+      <p data-cms="galeria_lead">Registro fotográfico propio de nuestros equipos de topografía y de los frentes de obra en ejecución.</p>
     </div>
 
     <div class="foto-grid">
-      <div class="foto-item reveal"><img src="img/campo/campo-01.jpg" alt="Equipo GNSS-RTK en lote de Cúcuta" loading="lazy"><span class="foto-cap">Levantamiento GNSS-RTK · Cúcuta</span></div>
-      <div class="foto-item reveal"><img src="img/obra/bonaire-02-cimentacion.jpg" alt="Cimentación en la urbanización Tenerife" loading="lazy"><span class="foto-cap">Cimentación · Urb. Tenerife</span></div>
-      <div class="foto-item reveal"><img src="img/obra/obra-movimiento-tierras.jpg" alt="Movimiento de tierras en terreno montañoso" loading="lazy"><span class="foto-cap">Movimiento de tierras</span></div>
-      <div class="foto-item reveal"><img src="img/obra/muro-contencion.jpg" alt="Muro de contención en ladera" loading="lazy"><span class="foto-cap">Muro de contención</span></div>
-      <div class="foto-item reveal"><img src="img/obra/topografia-estacion-total.jpg" alt="Estación total junto a la red eléctrica en zona rural" loading="lazy"><span class="foto-cap">Estación total · Zona rural</span></div>
-      <div class="foto-item reveal"><img src="img/obra/bonaire-03-via-interna.jpg" alt="Vía interna pavimentada en la urbanización" loading="lazy"><span class="foto-cap">Urbanismo · Vía interna</span></div>
+      <div class="foto-item reveal"><img src="img/campo/campo-01.jpg" alt="Equipo GNSS-RTK en lote de Cúcuta" loading="lazy"><span class="foto-cap" data-cms="foto1_cap">Levantamiento GNSS-RTK · Cúcuta</span></div>
+      <div class="foto-item reveal"><img src="img/obra/bonaire-02-cimentacion.jpg" alt="Cimentación en la urbanización Tenerife" loading="lazy"><span class="foto-cap" data-cms="foto2_cap">Cimentación · Urb. Tenerife</span></div>
+      <div class="foto-item reveal"><img src="img/obra/obra-movimiento-tierras.jpg" alt="Movimiento de tierras en terreno montañoso" loading="lazy"><span class="foto-cap" data-cms="foto3_cap">Movimiento de tierras</span></div>
+      <div class="foto-item reveal"><img src="img/obra/muro-contencion.jpg" alt="Muro de contención en ladera" loading="lazy"><span class="foto-cap" data-cms="foto4_cap">Muro de contención</span></div>
+      <div class="foto-item reveal"><img src="img/obra/topografia-estacion-total.jpg" alt="Estación total junto a la red eléctrica en zona rural" loading="lazy"><span class="foto-cap" data-cms="foto5_cap">Estación total · Zona rural</span></div>
+      <div class="foto-item reveal"><img src="img/obra/bonaire-03-via-interna.jpg" alt="Vía interna pavimentada en la urbanización" loading="lazy"><span class="foto-cap" data-cms="foto6_cap">Urbanismo · Vía interna</span></div>
     </div>
     <div style="text-align:center; margin-top:40px;">
       <a href="proyectos.html#galeria-obra" class="btn btn-ghost">Ver más fotos</a>
@@ -334,9 +372,9 @@
 <section class="proceso" id="proceso">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Proceso</div>
-      <h2>Así avanzamos en cada obra</h2>
-      <p>Un proceso técnico documentado, desde el reconocimiento del terreno hasta el cierre del proyecto.</p>
+      <div class="eyebrow" data-cms="proceso_eyebrow">Proceso</div>
+      <h2 data-cms="proceso_title">Así avanzamos en cada obra</h2>
+      <p data-cms="proceso_lead">Un proceso técnico documentado, desde el reconocimiento del terreno hasta el cierre del proyecto.</p>
     </div>
 
     <div class="stages stages-h">
@@ -359,23 +397,23 @@
       <div class="stages-list">
         <div class="stage-item">
           <span class="stage-num mono">FASE 01</span>
-          <h3>Reconocimiento y topografía</h3>
-          <p>Visita técnica, levantamiento del terreno y estudio de suelos antes de iniciar el diseño.</p>
+          <h3 data-cms="fase1_title">Reconocimiento y topografía</h3>
+          <p data-cms="fase1_desc">Visita técnica, levantamiento del terreno y estudio de suelos antes de iniciar el diseño.</p>
         </div>
         <div class="stage-item">
           <span class="stage-num mono">FASE 02</span>
-          <h3>Cimentación y obra gris</h3>
-          <p>Movimiento de tierras, cimentación y estructura de concreto o metálica.</p>
+          <h3 data-cms="fase2_title">Cimentación y obra gris</h3>
+          <p data-cms="fase2_desc">Movimiento de tierras, cimentación y estructura de concreto o metálica.</p>
         </div>
         <div class="stage-item">
           <span class="stage-num mono">FASE 03</span>
-          <h3>Obra blanca y acabados</h3>
-          <p>Instalaciones, revestimientos y acabados finales de la obra.</p>
+          <h3 data-cms="fase3_title">Obra blanca y acabados</h3>
+          <p data-cms="fase3_desc">Instalaciones, revestimientos y acabados finales de la obra.</p>
         </div>
         <div class="stage-item">
           <span class="stage-num mono">FASE 04</span>
-          <h3>Entrega y cierre</h3>
-          <p>Supervisión técnica, control de calidad y entrega formal del proyecto.</p>
+          <h3 data-cms="fase4_title">Entrega y cierre</h3>
+          <p data-cms="fase4_desc">Supervisión técnica, control de calidad y entrega formal del proyecto.</p>
         </div>
       </div>
     </div>
@@ -385,8 +423,8 @@
 <section class="cta-band">
   <div class="wrap cta-inner reveal">
     <div>
-      <h2 style="font-size:1.6rem; margin-bottom:8px;">¿Tiene un proyecto de construcción o topografía pendiente?</h2>
-      <p>Le respondemos con una propuesta técnica preliminar en máximo 48 horas.</p>
+      <h2 style="font-size:1.6rem; margin-bottom:8px;" data-cms="cta_title">¿Tiene un proyecto de construcción o topografía pendiente?</h2>
+      <p data-cms="cta_lead">Le respondemos con una propuesta técnica preliminar en máximo 48 horas.</p>
     </div>
     <a href="contacto.html" class="btn btn-primary">Solicitar cotización</a>
   </div>
@@ -417,11 +455,11 @@
       <div class="foot-col">
         <h4>Contacto</h4>
         <div class="copy-row" style="margin-bottom:10px;">
-          <a href="mailto:gjlconstrucciones@gmail.com" style="margin-bottom:0;">gjlconstrucciones@gmail.com</a>
-          <button class="copy-btn" data-copy="gjlconstrucciones@gmail.com" aria-label="Copiar correo">Copiar</button>
+          <a href="mailto:gjlconstrucciones@gmail.com" data-contact="email" data-contact-href="email_href" style="margin-bottom:0;">gjlconstrucciones@gmail.com</a>
+          <button class="copy-btn" data-copy="gjlconstrucciones@gmail.com" data-contact="email" data-contact-attr="data-copy" aria-label="Copiar correo">Copiar</button>
         </div>
-        <a href="tel:+573163106564">316 310 65 64</a>
-        <p>Av 5 # 4-109, Urb. Molinos del Norte, Cúcuta</p>
+        <a href="tel:+573163106564" data-contact="tel1_display" data-contact-href="tel1_href">316 310 65 64</a>
+        <p data-contact="address_short">Av 5 # 4-109, Urb. Molinos del Norte, Cúcuta</p>
       </div>
     </div>
   </div>
@@ -433,6 +471,9 @@
   </div>
 </footer>
 
+<script src="js/contact-data.js"></script>
+<script src="js/content-data.js"></script>
+<script src="js/cms.js"></script>
 <script src="js/common.js" defer></script>
 <script src="js/terrain.js" defer></script>
 </body>

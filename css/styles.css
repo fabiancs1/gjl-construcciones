@@ -22,6 +22,12 @@
   --radius: 0px;
   --radius-lg: 0px;
   --radius-pill: 999px;
+  /* Excepcion puntual a la estetica plana: tarjetas de contenido (servicios,
+     proyectos, valores, stats, galeria) pidieron explicitamente verse "mas
+     redondas, con efecto vidrio" — mismo criterio que ya se uso en los
+     iconos del nav (targets redondos + glass) en vez de deshacer el flat
+     global de botones/paneles grandes. */
+  --radius-card: 20px;
   --shadow-soft: none;
   --shadow-card: none;
 }
@@ -237,8 +243,23 @@ header.menu-open .menu-toggle span:nth-child(3){ transform: translateY(-6px) rot
   display:flex;
   flex-direction:column;
   gap: 24px;
-  max-width: 440px;
+  max-width: 580px;
   width:100%;
+}
+/* Titular real del hero (antes vivía oculto en un <h1 class="sr-only">,
+   el hero no tenía ninguna frase visible explicando qué hace la empresa). */
+.hero-text .eyebrow{ color: rgba(255,255,255,0.85); }
+.hero-text h1{
+  color:#fff;
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  line-height:1.1;
+  margin-bottom: 14px;
+  max-width: 18ch;
+}
+.hero-text .lead{
+  color: rgba(255,255,255,0.82);
+  font-size: 1.02rem;
+  max-width: 46ch;
 }
 @media (max-width: 860px){
   .hero{ min-height: 560px; }
@@ -435,9 +456,9 @@ section{ padding: 96px 0; }
 .carousel-cursor.dragging::after{ opacity:1; }
 .serv-tile{
   position: relative;
-  flex: 0 0 380px;
-  min-height: 420px;
-  padding: 28px;
+  flex: 0 0 300px;
+  min-height: 340px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -475,8 +496,8 @@ section{ padding: 96px 0; }
 }
 .serv-tile-body{ position:relative; z-index:1; }
 .serv-tile-tag{ font-family:'JetBrains Mono', monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.08em; opacity:0.85; margin-bottom:10px; display:block; }
-.serv-tile h3{ color:#fff; font-size:1.42rem; line-height:1.14; margin-bottom: 10px; }
-.serv-tile p{ color: rgba(255,255,255,0.82); font-size:0.88rem; max-width: 34ch; }
+.serv-tile h3{ color:#fff; font-size:1.18rem; line-height:1.18; margin-bottom: 8px; }
+.serv-tile p{ color: rgba(255,255,255,0.82); font-size:0.84rem; max-width: 30ch; }
 .serv-tile-cta{
   display:inline-flex; width:max-content;
   margin-top:20px;
@@ -498,7 +519,7 @@ section{ padding: 96px 0; }
 .serv-tile.c6{ background-color: #1B2227; }
 
 @media (max-width: 640px){
-  .serv-tile{ flex: 0 0 272px; min-height: 380px; }
+  .serv-tile{ flex: 0 0 240px; min-height: 300px; }
   .foot-grid{ grid-template-columns: 1fr; gap: 28px; }
 }
 
@@ -787,6 +808,13 @@ section{ padding: 96px 0; }
 
 /* Certificaciones */
 .cert-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cert-grid-2{ grid-template-columns: repeat(2, 1fr); }
+/* Antes estas dos variantes de columnas se fijaban con "style=" inline en
+   el HTML — un inline nunca cede ante el @media de abajo que las colapsa
+   a 1 columna (un estilo en línea gana a cualquier regla de hoja de
+   estilos, sea cual sea su especificidad), así que en celular real
+   quedaban siempre en 2-3 columnas angostas con overflow horizontal.
+   Encontrado al verificar con la técnica de iframe a 375px. */
 .cert-card{ border:1px solid var(--line); background:#fff; padding: 24px; border-radius: var(--radius); }
 .cert-card .cert-tag{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--slate); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px; display:block; }
 .cert-card h3{ font-size:1rem; margin-bottom:8px; }
@@ -1358,11 +1386,7 @@ header.scrolled{ background: rgba(255,255,255,0.98); border-bottom-color: var(--
 }
 .serv-visual.photo-duo .sv-photos{
   position:absolute; inset:0;
-  opacity:0;
-  transition: opacity 0.5s ease;
-  pointer-events:none;
 }
-.serv-visual.photo-duo.is-expanded .sv-photos{ opacity:1; pointer-events:auto; }
 .serv-visual.photo-duo .sv-main{
   width:100%; height:100%; object-fit:cover; display:block;
 }
@@ -1376,27 +1400,25 @@ header.scrolled{ background: rgba(255,255,255,0.98); border-bottom-color: var(--
   border: 5px solid var(--paper-2);
   outline: 1px solid var(--line);
 }
-.serv-visual.photo-duo .sv-expand{
-  position:absolute; inset:0; z-index:1;
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  background: var(--paper-2);
-  border: none;
-  cursor:pointer;
-  font-family:'JetBrains Mono', monospace;
-  font-size:0.78rem; letter-spacing:0.03em; text-transform:uppercase;
-  color: var(--ink-soft);
-  transition: opacity 0.3s ease, color 0.2s ease;
-}
-.serv-visual.photo-duo .sv-expand svg{ transition: transform 0.25s ease; }
-.serv-visual.photo-duo .sv-expand:hover{ color: var(--action); }
-.serv-visual.photo-duo.is-expanded .sv-expand{ opacity:0; pointer-events:none; }
 
 /* Fotos reales dentro de .proy-map, reemplazando el mapa embebido */
-.proy-map{ height: 280px; }
+.proy-map{ height: 220px; }
 .proy-map img{
   width:100%; height:100%; object-fit:cover; display:block;
   transition: transform 0.5s cubic-bezier(.16,1,.3,1);
 }
+/* Insignia de estado flotando sobre la foto (vidrio), en vez de ocupar su
+   propio renglón en el cuerpo de la tarjeta — tarjeta más compacta y la
+   foto gana protagonismo, mismo lenguaje "redondo + vidrio" del resto. */
+.proy-top{ margin-bottom: 0; }
+.proy-top .badge{
+  position:absolute; top:16px; right:16px; z-index:2;
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  color:#fff; border:1px solid rgba(255,255,255,0.3);
+}
+.proy-body{ padding-top: 18px; }
 .proy-card:hover .proy-map img{ transform: scale(1.06); }
 
 @media (max-width: 860px){
@@ -1421,4 +1443,495 @@ header.scrolled{ background: rgba(255,255,255,0.98); border-bottom-color: var(--
   .carousel-cursor{ display:none; }
   .stage-item{ transition:none; opacity:1; }
   .stage-item h3{ transition:none; }
+  .eyebrow::before{ transition:none; }
+  .hero-bg{ transform:none !important; }
+}
+
+/* =====================================================================
+   PULIDO VISUAL — vidrio, color ambiental y animaciones de scroll
+   (2026-11-21). Bloque añadido al final a propósito: todo lo de aquí
+   abajo son refuerzos sobre reglas que ya existen arriba (mismo
+   selector, se gana por orden en la cascada) en vez de reescribirlas,
+   para no tener que perseguir cada declaración original por el archivo.
+   Mismo lenguaje de marca que el panel de administración (admin/admin.css):
+   brillo ambiental con los 3 colores de marca (--stake/--forest/--slate)
+   detrás de los paneles oscuros, para que admin y público se sientan
+   del mismo sistema. ===================================================== */
+
+/* ---- Brillo ambiental detrás de los paneles oscuros ---- */
+/* z-index:0 (no solo position:relative) es necesario para que cada
+   seccion cree su PROPIO contexto de apilamiento — si no, el ::before de
+   z-index:-1 de abajo se escapa por detras de TODO el documento (incluida
+   su propia seccion), en vez de quedar solo detras del fondo plano de
+   esta seccion puntual. Gotcha real: sin esto el brillo quedaba invisible
+   pese a estar bien aplicado (verificado con getComputedStyle). */
+.mission, .cta-band, footer, .serv-highlight{ position:relative; z-index:0; overflow:hidden; }
+.mission::before, .cta-band::before, footer::before, .serv-highlight::before{
+  content:"";
+  position:absolute; inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:
+    radial-gradient(680px 420px at 10% -20%, rgba(201,98,42,0.42), transparent 65%),
+    radial-gradient(680px 480px at 95% 120%, rgba(43,93,63,0.38), transparent 65%);
+}
+.serv-highlight::before{
+  background-image:
+    radial-gradient(460px 300px at 95% -25%, rgba(74,102,112,0.5), transparent 68%),
+    radial-gradient(460px 300px at -5% 125%, rgba(201,98,42,0.34), transparent 68%);
+}
+
+/* ---- Stats: acento de color por tarjeta + elevación más marcada al pasar el mouse ---- */
+.stat{
+  position:relative;
+  overflow:hidden;
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.stat::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background: var(--stake);
+}
+.stat:nth-child(2)::before{ background: var(--forest); }
+.stat:nth-child(3)::before{ background: var(--slate); }
+.stat:nth-child(4)::before{ background: var(--action); }
+.stat:hover{
+  transform: translateY(-7px);
+  box-shadow: 0 30px 60px -24px rgba(0,0,0,0.22);
+  border-color: var(--line-strong);
+}
+
+/* ---- Tarjetas de servicio: profundidad "de vidrio" al pasar el mouse
+   (realce de borde translúcido + sombra marcada + leve brillo), sin tocar
+   el fundido de revelado ni el velo de legibilidad ya existentes. ---- */
+.serv-tile{ transition: transform 0.4s cubic-bezier(.16,1,.3,1), box-shadow 0.4s ease, filter 0.4s ease; }
+.serv-tile:hover{
+  transform: translateY(-7px);
+  box-shadow: 0 34px 70px -22px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.16);
+  filter: brightness(1.05);
+}
+
+/* ---- Eyebrow: la rayita se "dibuja" de 0 a 24px al entrar en pantalla,
+   mismo mecanismo que ya usan las líneas del riel .stages-fill. ---- */
+.eyebrow::before{ width:0; transition: width 0.7s cubic-bezier(.16,1,.3,1) 0.1s; }
+.reveal.in .eyebrow::before,
+.eyebrow.reveal.in::before{ width:24px; }
+.section-head.center .eyebrow::before{ width:0 !important; }
+
+/* ---- FAQ: realce sutil de fondo al pasar el mouse / al abrir ---- */
+.faq-item{ transition: background 0.25s ease; border-radius:10px; }
+.faq-item:hover{ background: rgba(0,0,0,0.025); }
+.faq-item.open{ background: rgba(0,0,0,0.035); }
+
+/* ---- Parallax del hero: el common.js mueve .hero-bg en scroll; aquí va
+   la base (escala ligeramente más grande para que el desplazamiento
+   nunca descubra un borde, ver overflow:hidden de .hero). ---- */
+.hero-bg{ transform: scale(1.08); will-change: transform; transition: transform 0.1s linear; }
+
+@media (max-width:860px){
+  /* En movil el parallax se desactiva (ver common.js, min-width:861px ya
+     se usaba para el video viejo) — se deja la imagen a su escala normal. */
+  .hero-bg{ transform:none; }
+}
+
+/* ---- Bug real preexistente, encontrado al verificar el móvil con la
+   técnica de iframe (ver memoria del proyecto): la regla ".foot-grid a
+   1 columna por debajo de 640px" vivía en un @media que aparece ANTES
+   en el archivo que la regla base y que el @media de 860px — en un
+   empate de especificidad gana quien aparece último en el CSS, así que
+   la de 860px (2 columnas) ganaba siempre, incluso en celulares angostos.
+   Repetida aquí al final para que sí tenga la última palabra. ---- */
+@media (max-width:640px){
+  .foot-grid{ grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* =====================================================================
+   SEGUNDA RONDA DE PULIDO (mismo día) — pedido explícito: más vidrio en
+   tarjetas/nav, más animación al interactuar, más color en las páginas
+   interiores (servicios/proyectos/nosotros/contacto, que hasta ahora
+   eran casi blanco y negro frente al inicio). ===================================================== */
+
+/* ---- Nav: vidrio más presente ---- */
+header{
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+}
+header.scrolled{ background: rgba(255,255,255,0.92); }
+
+/* ---- Menú móvil: desliza en vez de aparecer de golpe ---- */
+@media (max-width:860px){
+  .navlinks, .nav-right{
+    display:flex; flex-direction:column; align-items:stretch;
+    max-height:0; opacity:0; overflow:hidden;
+    transition: max-height 0.45s cubic-bezier(.16,1,.3,1), opacity 0.3s ease 0.05s;
+  }
+  header.menu-open .navlinks{ max-height:320px; opacity:1; }
+  header.menu-open .nav-right{ max-height:240px; opacity:1; }
+}
+
+/* ---- Iconos del nav: halo de color al pasar el mouse ---- */
+.nav-icon-btn{ transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease; }
+.nav-icon-btn:hover{ box-shadow: 0 0 0 6px rgba(201,98,42,0.16); }
+
+/* ---- Botones: brillo que cruza al pasar el mouse (mismo recurso en
+   los 3 estilos de botón — ya tenían position:relative;overflow:hidden
+   de un pase anterior, solo faltaba el propio brillo). ---- */
+.navcta{ position:relative; overflow:hidden; }
+.btn-primary::after, .btn-ghost::after, .navcta::after{
+  content:"";
+  position:absolute; top:0; left:-60%;
+  width:40%; height:100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;
+}
+.btn-primary:hover::after, .btn-ghost:hover::after, .navcta:hover::after{ left:120%; }
+
+/* ---- page-hero (servicios/proyectos/nosotros/contacto): lavado de
+   color ambiental suave, versión clara del brillo que ya tienen las
+   secciones oscuras — para que estas páginas no se sientan en blanco
+   y negro frente al inicio. ---- */
+.page-hero{ z-index:0; }
+.page-hero::before{
+  content:"";
+  position:absolute; inset:0; z-index:-1;
+  pointer-events:none;
+  background-image:
+    radial-gradient(560px 300px at 92% -15%, rgba(201,98,42,0.09), transparent 65%),
+    radial-gradient(520px 320px at -5% 115%, rgba(43,93,63,0.08), transparent 65%);
+}
+
+/* ---- "Por qué GJL" (why-us): era la única sección plana sin ningún
+   refuerzo visual, justo después del hero — mismo lavado ambiental claro
+   que .page-hero, más un segundo tono para que no se sienta un bloque
+   blanco suelto entre el hero vibrante y la franja de clientes. ---- */
+.why-us{ position:relative; z-index:0; overflow:hidden; }
+.why-us::before{
+  content:"";
+  position:absolute; inset:0; z-index:-1;
+  pointer-events:none;
+  background-image:
+    radial-gradient(620px 340px at -8% -10%, rgba(201,98,42,0.08), transparent 65%),
+    radial-gradient(560px 360px at 108% 105%, rgba(43,93,63,0.09), transparent 65%);
+}
+
+/* ---- Tarjetas de proyecto: vidrio + halo de color al hover ---- */
+.proy-card{ position:relative; z-index:0; }
+.proy-card::before{
+  content:"";
+  position:absolute; inset:0; z-index:-1;
+  pointer-events:none;
+  background-image: radial-gradient(280px 180px at 100% 0%, rgba(201,98,42,0.10), transparent 70%);
+  opacity:0;
+  transition: opacity 0.4s ease;
+}
+.proy-card:hover::before{ opacity:1; }
+.proy-card{ transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease, border-color 0.35s ease; }
+.proy-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -26px rgba(0,0,0,0.26);
+  border-color: var(--stake);
+}
+
+/* ---- Misión/Visión/Valores (nosotros.html): acento de color por
+   tarjeta, igual criterio que las stats del inicio. ---- */
+.cert-card{
+  position:relative;
+  border-top: 3px solid var(--line-strong);
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1), box-shadow 0.3s ease, border-top-color 0.3s ease;
+}
+.cert-card:nth-child(3n+1){ border-top-color: var(--stake); }
+.cert-card:nth-child(3n+2){ border-top-color: var(--forest); }
+.cert-card:nth-child(3n+3){ border-top-color: var(--slate); }
+.cert-card:hover{ transform: translateY(-5px); box-shadow: 0 26px 50px -26px rgba(0,0,0,0.18); }
+
+/* ---- Línea de tiempo (nosotros.html): marcador de color por hito ---- */
+.tl-item{ position:relative; padding-left:22px; transition: padding-left 0.25s ease, background 0.25s ease; }
+.tl-item::before{
+  content:""; position:absolute; left:0; top:33px;
+  width:9px; height:9px; border-radius:50%;
+  background: var(--stake);
+}
+.tl-item:nth-child(2)::before{ background: var(--forest); }
+.tl-item:nth-child(3)::before{ background: var(--slate); }
+.tl-item:nth-child(4)::before{ background: var(--action); }
+.tl-item:hover{ padding-left:30px; }
+
+/* ---- Formulario de contacto: campos "de vidrio" con foco de color ---- */
+.field input, .field textarea, .field select{
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.field input:focus, .field textarea:focus, .field select:focus{
+  border-color: var(--stake);
+  box-shadow: 0 0 0 4px rgba(201,98,42,0.14);
+  background: #fff;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .navlinks, .nav-right{ transition:none; }
+  .btn-primary::after, .btn-ghost::after, .navcta::after{ display:none; }
+  .proy-card::before{ transition:none; }
+  .tl-item{ transition:none; }
+}
+
+/* =====================================================================
+   TERCERA RONDA — barra de navegación: todos los "targets" (links,
+   iconos, hamburguesa) más redondos y con más vidrio, sin tocar colores
+   ni tipografía (misma estética, solo más forma pastilla + más blur).
+   ===================================================================== */
+
+/* ---- Links del menú: pastilla de vidrio en vez de solo subrayado.
+   Se retira el subrayado que se dibujaba al hover/activo (abajo) y se
+   reemplaza por un fondo redondeado — mismo lenguaje "más redondo". ---- */
+.navlinks{ gap:4px; }
+.navlinks a:not(.navcta){
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  border-bottom: none;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+.navlinks a:not(.navcta)::after{ display:none; }
+.navlinks a:not(.navcta):hover{ background: rgba(26,28,26,0.07); }
+.navlinks a.active{ background: rgba(26,28,26,0.08); font-weight:600; }
+
+/* ---- Iconos del nav + hamburguesa: de círculo sólido a burbuja de
+   vidrio (translúcida + blur), y pasan a sólido solo al interactuar
+   (hover en los iconos, menú abierto en la hamburguesa) — mismo
+   mecanismo de "vidrio en reposo, sólido al usar" en los dos. ---- */
+.nav-icon-btn{
+  background: rgba(26,28,26,0.07);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border: 1px solid rgba(0,0,0,0.08);
+  color: var(--action);
+}
+.nav-icon-btn:hover{ background: var(--action); color:#fff; border-color: var(--action); }
+
+.menu-toggle{
+  background: rgba(26,28,26,0.07);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.menu-toggle span{ background: var(--action); }
+header.menu-open .menu-toggle{ background: var(--action); border-color: var(--action); }
+header.menu-open .menu-toggle span{ background:#fff; }
+
+@media (max-width:860px){
+  /* En el menú móvil abierto los links ya se apilan a ancho completo —
+     la pastilla redondeada se ve mejor más angosta (no ancho completo)
+     y alineada a la izquierda en vez de ocupar todo el renglón. */
+  .navlinks a:not(.navcta){
+    width: max-content;
+    padding: 12px 18px;
+    border-bottom: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .navlinks a:not(.navcta), .nav-icon-btn, .menu-toggle{ transition:none; }
+}
+
+/* =====================================================================
+   MODO EDICIÓN EN VIVO (js/cms.js) — widget de acceso, modal de
+   login/registro, afordancias de edición inline y barra de guardado.
+   Solo aparece cuando admin/whoami.php confirma sesión activa (o para
+   mostrar el botón "Acceso"); en GitHub Pages ese fetch simplemente
+   falla y nada de este bloque llega a verse. Mismo lenguaje visual de
+   vidrio + colores de marca que el resto del sitio y el panel admin.
+   ===================================================================== */
+
+.cms-widget{
+  position: fixed; left: 24px; bottom: 24px; z-index: 500;
+  display: flex; gap: 8px;
+  font-family: 'Inter', sans-serif;
+}
+.cms-access-btn, .cms-toggle-btn, .cms-logout-btn{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem; letter-spacing: 0.02em;
+  padding: 11px 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(20,21,20,0.78);
+  color: #fff;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.cms-access-btn:hover, .cms-toggle-btn:hover, .cms-logout-btn:hover{ transform: translateY(-2px); }
+.cms-toggle-btn.cms-on{ background: var(--stake); border-color: var(--stake); }
+
+.cms-modal-overlay{
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.cms-modal{
+  position: relative;
+  width: 100%; max-width: 380px;
+  background: #fff; border-radius: var(--radius-lg, 18px);
+  padding: 32px 28px 28px;
+  box-shadow: 0 40px 80px -30px rgba(0,0,0,0.5);
+}
+.cms-modal-tabs{ display:flex; gap:4px; margin-bottom:22px; background: var(--paper-2); border-radius: var(--radius-pill); padding:4px; }
+.cms-tab{
+  flex:1; padding:9px 0; border:0; background:transparent; border-radius: var(--radius-pill);
+  font-family:'JetBrains Mono', monospace; font-size:0.78rem; color: var(--ink-soft); cursor:pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.cms-tab-active{ background: var(--action); color:#fff; }
+.cms-form{ display:flex; flex-direction:column; gap:14px; }
+.cms-form[hidden]{ display:none; }
+.cms-form label{ display:flex; flex-direction:column; gap:6px; font-size:0.86rem; color: var(--ink-soft); }
+.cms-form input{
+  font-family: inherit; font-size:0.95rem; padding:11px 14px;
+  border:1px solid var(--line); border-radius:10px; background: var(--paper-2);
+}
+.cms-form input:focus{ border-color: var(--stake); outline:none; box-shadow:0 0 0 3px rgba(201,98,42,0.14); }
+.cms-form button[type="submit"]{ width:100%; justify-content:center; margin-top:4px; }
+.cms-form-error{
+  font-size:0.82rem; color:#9C2B1F; background:#FBE9E7; border:1px solid #E8B4AC;
+  border-radius:8px; padding:8px 12px;
+}
+.cms-modal-close{
+  position:absolute; top:14px; right:14px; width:30px; height:30px;
+  border-radius:50%; border:0; background: var(--paper-2); font-size:1.2rem; line-height:1;
+  cursor:pointer; color: var(--ink-soft);
+}
+
+.cms-savebar{
+  position: fixed; left:50%; bottom: 24px; transform: translate(-50%, 120px);
+  z-index: 500;
+  display:flex; align-items:center; gap:14px;
+  background: rgba(20,21,20,0.9);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  color:#fff; padding: 12px 14px 12px 22px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1);
+}
+.cms-savebar.cms-show{ transform: translate(-50%, 0); }
+.cms-save-count{ font-family:'JetBrains Mono', monospace; font-size:0.8rem; color: rgba(255,255,255,0.75); white-space:nowrap; }
+.cms-discard-btn{
+  background:transparent; border:1px solid rgba(255,255,255,0.25); color:#fff;
+  padding:9px 16px; border-radius: var(--radius-pill); font-size:0.82rem; cursor:pointer;
+}
+.cms-save-btn{ padding:10px 20px; }
+
+.cms-toast{
+  position: fixed; left:50%; top:24px; transform: translate(-50%, -120px);
+  z-index: 1100;
+  background: var(--action); color:#fff;
+  font-size:0.86rem; padding:12px 22px; border-radius: 16px;
+  box-shadow: 0 20px 40px -16px rgba(0,0,0,0.4);
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1);
+  max-width: min(420px, calc(100vw - 32px));
+  text-align:center; line-height:1.4;
+}
+.cms-toast.cms-show{ transform: translate(-50%, 0); }
+.cms-toast-error{ background:#9C2B1F; }
+
+/* ---- Afordancias de edición: solo activas con body.cms-editing ---- */
+body.cms-editing [data-cms]:not([data-cms-mirror]){ outline-offset:4px; }
+body.cms-editing .cms-editable{
+  outline: 1.5px dashed rgba(201,98,42,0.55);
+  border-radius: 4px;
+  transition: outline-color 0.15s ease, background 0.15s ease;
+}
+body.cms-editing .cms-editable:hover{ outline-color: var(--stake); background: rgba(201,98,42,0.06); }
+body.cms-editing .cms-editable:focus{ outline: 1.5px solid var(--stake); background: rgba(201,98,42,0.08); }
+
+.cms-img-edit{ position:relative; display:block; }
+/* Badge "Cambiar foto" siempre visible en edición (no solo al hover) para
+   que quien use el panel vea de una que esa imagen es editable — en una
+   esquina, no al centro, para no tapar la foto mientras no se interactúa. */
+.cms-img-overlay{
+  position:absolute; right:10px; bottom:10px;
+  background: rgba(10,10,10,0.68); color:#fff;
+  font-family:'JetBrains Mono', monospace; font-size:0.74rem; font-weight:600;
+  padding:9px 16px; border-radius: var(--radius-pill); border:1px solid rgba(255,255,255,0.4);
+  cursor:pointer; transition: background 0.2s ease, transform 0.2s ease;
+  z-index:2;
+  display:flex; align-items:center; gap:6px;
+}
+.cms-img-overlay::before{ content:"✎"; font-size:0.9rem; }
+.cms-img-edit:hover .cms-img-overlay, .cms-img-overlay:focus-visible{
+  background: var(--stake); transform: translateY(-2px);
+}
+.cms-hidden-file{ display:none; }
+
+@media (max-width: 640px){
+  .cms-widget{ left:12px; bottom:12px; }
+  .cms-savebar{ left:12px; right:12px; transform: translateY(120px); width:auto; }
+  .cms-savebar.cms-show{ transform: translateY(0); }
+}
+
+/* =====================================================================
+   RONDA "TARGETS MÁS REDONDOS + GLASS" EN TARJETAS DE CONTENIDO
+   (2026-11-22). Pedido explícito del usuario: las fotos de los servicios
+   deben verse siempre, sin esperar la animación de aparición, y las
+   tarjetas (servicios, valores, proyectos, stats, galería, video) deben
+   verse "más redondas, con efecto vidrio" — igual que ya se hizo con los
+   íconos del nav. Todo por sobreescritura al final del archivo (mismo
+   patrón que el resto de este CSS), sin tocar las reglas originales.
+   ===================================================================== */
+
+/* ---- Bug real: las fotos de servicios quedaban ocultas tras un velo
+   negro que solo se desvanecía cuando el observer de scroll marcaba
+   ".reveal.in" — en el carrusel horizontal, las tarjetas que no entraban
+   en el alto de la ventana al cargar (aunque sí estén dentro del ancho
+   visible del carrusel) nunca disparaban esa marca, así que se quedaban
+   negras para siempre en vez de mostrar la foto. Se quita el velo por
+   completo: las fotos ahora se ven desde el primer render. ---- */
+.serv-tile::before{ display:none; }
+
+/* ---- Tarjetas de servicio: esquinas redondas + badge de categoría en
+   píldora de vidrio (antes texto plano) ---- */
+.serv-tile{ border-radius: var(--radius-card); }
+.serv-tile-tag{
+  display:inline-flex; width:max-content;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.16);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+/* ---- Mismo tratamiento "más redondo + vidrio" en el resto de tarjetas
+   de contenido de todas las vistas (valores, proyectos, stats, galería,
+   video, ficha de coordenadas del hero y las citas oscuras de servicios). ---- */
+.cert-card, .proy-card, .stat, .video-card, .benchmark-card{
+  border-radius: var(--radius-card);
+}
+.serv-highlight{ border-radius: var(--radius-card); }
+.cert-card, .stat{
+  background: rgba(255,255,255,0.68);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+}
+.proy-card{
+  overflow:hidden; /* ya estaba, pero se repite aquí para que el radio nuevo recorte limpio la foto/el video del mapa */
+}
+
+/* ---- Galería de fotos: antes un mosaico a sangre completa (gap de 1px,
+   sin radio, a propósito) — ahora con un poco más de aire entre celdas
+   para que el radio nuevo se note en vez de verse cortado contra la
+   celda vecina. ---- */
+.foto-grid{ gap: 10px; background: transparent; }
+.foto-item{ border-radius: var(--radius-card); }
+
+@media (prefers-reduced-motion: reduce){
+  .serv-tile::before{ display:none; }
 }

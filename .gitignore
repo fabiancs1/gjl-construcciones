@@ -1,0 +1,5 @@
+# Panel de administración: corre con PHP/MySQL locales, nunca se sube al
+# repo público (GitHub Pages solo sirve estático; no tiene por qué exponerse
+# el código ni las credenciales del panel). El sitio público no depende de
+# esta carpeta para funcionar — admin/publish.php solo escribe en js/*.js.
+admin/
