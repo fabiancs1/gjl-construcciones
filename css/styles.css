@@ -109,7 +109,9 @@ nav.wrap{
 .nav-right{ display:flex; align-items:center; gap: 28px; justify-self:end; }
 .nav-icons{ display:flex; align-items:center; gap: 8px; }
 .nav-icon-btn{
-  width: 40px; height: 40px;
+  /* 44px: minimo de objetivo tactil recomendado (WCAG 2.5.5 / Apple HIG),
+     antes 40px quedaba un poco chico para tocar con el dedo. */
+  width: 44px; height: 44px;
   border-radius: 50%;
   background: var(--ink);
   color: #fff;
@@ -181,7 +183,8 @@ footer .logo .mark{ height: 30px; }
    de mas abajo (860px), donde reemplaza a .navlinks/.nav-right. */
 .menu-toggle{
   display:none;
-  width: 40px; height: 40px;
+  /* mismo minimo de 44px que .nav-icon-btn, ver comentario de arriba */
+  width: 44px; height: 44px;
   border-radius: 50%;
   background: var(--ink);
   border: 0;
@@ -1934,4 +1937,47 @@ body.cms-editing .cms-editable:focus{ outline: 1.5px solid var(--stake); backgro
 
 @media (prefers-reduced-motion: reduce){
   .serv-tile::before{ display:none; }
+}
+
+/* =====================================================================
+   CUARTA RONDA — menu movil: mejores dimensiones y mas aire para el
+   dedo (2026-11-23). Pedido explicito: mejorar las dimensiones de la
+   barra de arriba y del desplegable para que se vea mejor y sea mas
+   facil de usar en pantalla de celular. Igual que las rondas
+   anteriores, se agrega al final para ganar por orden de cascada sobre
+   las reglas que ya existian en vez de perseguir cada una por el
+   archivo (los 44px de .menu-toggle/.nav-icon-btn ya se aplicaron
+   arriba, en su declaracion original). ===================================================== */
+
+@media (max-width: 860px){
+  /* La barra superior tenia el mismo padding lateral que escritorio
+     (24px) — en un telefono angosto (~360px) eso deja muy poco aire
+     entre el logo y la hamburguesa. nav.wrap es mas especifico que el
+     .wrap generico (usado por el resto de secciones), asi que esto
+     solo achica la barra de navegacion, no el contenido de las paginas. */
+  nav.wrap{ padding-left: 16px; padding-right: 16px; }
+
+  /* Filas del desplegable a todo el ancho en vez de una pildora del
+     ancho del texto alineada a la izquierda: el area de toque pasa a
+     ser toda la fila (48px de alto minimo, el estandar tactil) en vez
+     de depender de acertarle justo a la palabra. */
+  .navlinks{ gap: 8px; }
+  .navlinks a:not(.navcta){
+    display:flex; align-items:center;
+    width: 100%;
+    min-height: 48px;
+  }
+  .nav-right{ gap: 18px; }
+  .nav-icons{ gap: 18px; }
+  .nav-right .navcta{
+    display:flex; align-items:center; justify-content:center;
+    width: 100%;
+    min-height: 48px;
+  }
+
+  /* Los topes de altura del desplegable (ver "SEGUNDA RONDA" arriba,
+     320px/240px) se quedan cortos con filas de 48px + mas separacion
+     — se suben con margen de sobra para que nada quede cortado. */
+  header.menu-open .navlinks{ max-height: 420px; }
+  header.menu-open .nav-right{ max-height: 260px; }
 }
