@@ -127,6 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  /* rootMargin negativo abajo: la tarjeta se marca ".in" un poco antes
+     de que el umbral de 12% se cumpla al pixel — en movil, donde el
+     scroll suele ir mas rapido (flick), esto evita el "pop" tardio de
+     una animacion que todavia esta arrancando cuando el contenido ya
+     deberia verse completo. */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if(e.isIntersecting){
@@ -136,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   document.querySelectorAll('.serv-icon').forEach(icon => icon.classList.add('draw'));
