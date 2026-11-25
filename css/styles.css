@@ -956,6 +956,20 @@ footer .copy-btn{ background: rgba(255,255,255,0.1); border-color: rgba(255,255,
 header{ transition: border-color 0.3s ease, background 0.3s ease; }
 header.scrolled{ background: rgba(255,255,255,0.98); border-bottom-color: var(--line-strong); }
 
+/* ---- Header que se oculta al bajar, en movil: la barra ocupaba espacio
+   fijo arriba todo el tiempo, restando pantalla util en celular. Se
+   desliza fuera de vista al bajar y vuelve al subir un poco (ver
+   common.js, clase .header-hidden) — solo bajo el breakpoint movil, en
+   escritorio el header sticky se queda igual que siempre. ---- */
+@media (max-width: 860px){
+  header{ transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s cubic-bezier(.4,0,.2,1); }
+  header.header-hidden{ transform: translateY(-100%); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  header{ transition: border-color 0.3s ease, background 0.3s ease; }
+}
+
 .serv-card{ position: relative; }
 .serv-card svg.serv-icon path, .serv-card svg.serv-icon circle, .serv-card svg.serv-icon line, .serv-card svg.serv-icon rect{
   transition: stroke 0.3s ease;

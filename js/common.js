@@ -91,6 +91,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  /* Header que se oculta al bajar y reaparece al subir, solo en movil
+     (ver css, .header-hidden bajo @media max-width:860px) — en ese
+     ancho la barra fija ocupaba pantalla util todo el tiempo; aqui se
+     libera espacio al bajar sin perder el acceso al menu, que vuelve
+     con solo subir un poco el dedo. */
+  if(header){
+    const isMobileHeader = () => window.matchMedia('(max-width:860px)').matches;
+    let lastY = window.scrollY;
+    let ticking = false;
+    const updateHeaderVisibility = () => {
+      ticking = false;
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if(!isMobileHeader() || header.classList.contains('menu-open')){
+        header.classList.remove('header-hidden');
+      } else if(y < 90){
+        header.classList.remove('header-hidden');
+      } else if(delta > 6){
+        header.classList.add('header-hidden');
+      } else if(delta < -6){
+        header.classList.remove('header-hidden');
+      }
+      lastY = y;
+    };
+    window.addEventListener('scroll', () => {
+      if(!ticking){
+        ticking = true;
+        requestAnimationFrame(updateHeaderVisibility);
+      }
+    }, { passive: true });
+    window.addEventListener('resize', () => {
+      if(!isMobileHeader()) header.classList.remove('header-hidden');
+    });
+  }
+
   /* Menu movil (hamburguesa): en el breakpoint de 860px .navlinks y
      .nav-right pasan a ocultarse por CSS hasta que header tiene
      .menu-open — este boton es el unico que la agrega/quita. */
